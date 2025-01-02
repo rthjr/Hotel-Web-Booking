@@ -15,7 +15,7 @@ export const Button = ({ param }) => {
 
       <span className="relative block border border-current bg-white p-2">
         {" "}
-        Download{" "}
+        {param}{" "}
       </span>
     </button>
   );
