@@ -3,7 +3,7 @@ export const HotelData = [
     id: 1,
     name: "Hotel 1",
     available: "Yes",
-    price: "100&",
+    price: "100$",
     image: "/image/HotelImage.jpg",
   },
   {
