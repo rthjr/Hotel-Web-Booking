@@ -1,15 +1,15 @@
+import Header from '@components/layout/Header'
 import React from 'react'
-import HotelCard from '@/components/Card/HotelCard'
 
 const Home = () => {
   return (
-    <div className='container mx-auto'>
-      <div>
-        {/* Header */}
-        {/* Banner */}
-        {/* Hotel Catd */}
-        <HotelCard />
-        {/* Footer */}
+    <div className='w-full h-full'>
+      <div className='w-full flex justify-center items-center shadow-2xl'>
+        <div className='w-10/12'>
+          {/* Header */}
+          <Header />
+
+        </div>
       </div>
     </div>
   )
