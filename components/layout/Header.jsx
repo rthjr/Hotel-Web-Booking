@@ -42,7 +42,7 @@ const Header = () => {
         </li>
       </ul>
       {/* login */}
-      <Button param = "Book Now" handleRoom={handleRoom}/>
+      <Button param = "Book Now" handleRoom={handleRoom} style="rounded-xl"/>
     </div>
   );
 };

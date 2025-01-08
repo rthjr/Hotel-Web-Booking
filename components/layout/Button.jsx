@@ -1,13 +1,20 @@
-"use client"
+"use client";
 
 import React from "react";
 import { useRouter } from "@node_modules/next/navigation";
-export const Button = ({ param, handleRoom }) => {
+export const Button = ({ param, handleRoom, style }) => {
   return (
-    <button className="group relative inline-block text-sm font-medium text-textColor focus:outline-none focus:ring active:text-textColor" onClick={handleRoom}>
-      <span className="absolute inset-0 translate-x-0 translate-y-0 bg-textColor transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5"></span>
+    <button
+      className={` group relative inline-block text-sm font-medium text-textColor focus:outline-none focus:ring active:text-textColor`}
+      onClick={handleRoom}
+    >
+      <span
+        className={`${style} absolute inset-0 translate-x-0 translate-y-0 bg-textColor transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5`}
+      ></span>
 
-      <span className="relative block border border-current bg-white py-2 px-4">
+      <span
+        className={`${style} relative block border border-current bg-white py-2 px-4`}
+      >
         {" "}
         {param}{" "}
       </span>
@@ -16,7 +23,6 @@ export const Button = ({ param, handleRoom }) => {
 };
 
 export const LoginButton = () => {
-
   const router = useRouter();
 
   return (

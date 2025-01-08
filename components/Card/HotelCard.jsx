@@ -36,7 +36,7 @@ const HotelCard = () => {
                   <FaWifi size={20} />
                 </div>
               </div>
-              <Button param="Book Now" />
+              <Button param="Book Now"/>
             </div>
           </div>
         </div>
