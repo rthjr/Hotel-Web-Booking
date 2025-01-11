@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from "react";
@@ -15,7 +16,8 @@ const Header = () => {
   }
  
   return (
-    <div className="flex justify-between items-center p-4">
+  <div className="sticky top-0">
+    <div className="flex justify-between items-center p-4 ">
       <Link href="#">
         <Image 
           src="/logo/logo.png"
@@ -44,6 +46,7 @@ const Header = () => {
       {/* login */}
       <Button param = "Book Now" handleRoom={handleRoom} style="rounded-xl"/>
     </div>
+  </div>
   );
 };
 
