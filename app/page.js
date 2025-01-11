@@ -9,6 +9,8 @@ import Footer from '@components/layout/Footer'
 
 const Home = () => {
   return (
+
+    // website
     <div className="flex flex-col gap-8 w-full h-full bg-gray-100">
       {/* Header */}
       <div className='w-full flex justify-center items-center shadow-2xl sticky top-0 z-10 bg-white'>
@@ -42,7 +44,7 @@ const Home = () => {
       </div>
 
       {/* menu filter */}
-      <div className='lg:-mt-72 w-full flex justify-center items-center sticky top-24 z-20'>
+      <div className='lg:-mt-[19%] w-full flex justify-center items-center sticky top-24 z-20'>
         <div className='w-10/12'>
           {/* MenuFilter */}
           <div><MenuFilter /></div>
@@ -59,7 +61,7 @@ const Home = () => {
 
         <div className="w-10/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-textColor">
           {FacilitiesHotel.map((fh) => (
-            <div className="flex flex-col items-center justify-center gap-4 p-8 rounded-lg bg-gray-100 w-52 h-52" key={fh.id}>
+            <div className="flex flex-col items-center justify-center gap-4 p-8 rounded-lg bg-white w-52 h-52 hover:bg-textColor hover:text-white transition-all" key={fh.id}>
               <span>{fh.icon}</span>
               <span>{fh.facility}</span>
             </div>
@@ -88,8 +90,9 @@ const Home = () => {
               <div className='flex flex-col gap-4 p-4 bg-white rounded-lg' key={rd.id}>
                 <div className='relative aspect-square'> {/* Adjust aspect ratio as needed */}
                   <Image
+                  
                     src={rd.img}
-                    alt={rd.des} // Use a descriptive alt text
+                    alt={rd.des} 
                     fill
                     className='object-cover rounded-lg z-8'
                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' 
@@ -112,6 +115,9 @@ const Home = () => {
         <Footer />
       </div>
     </div>
+
+    // mobile
+
   )
 }
 
