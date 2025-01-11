@@ -5,27 +5,31 @@ import React from 'react'
 import Image from '@node_modules/next/image'
 import { FacilitiesHotel } from '@data/HotelData'
 import { RoomDetail } from '@data/HotelData'
+import Footer from '@components/layout/Footer'
 
 const Home = () => {
   return (
-    <div className="flex flex-col gap-8 w-full h-full">
-      <div className='w-full h-full flex flex-col gap-8 bg-gray-100 pb-8'>
-        <div className='w-full flex justify-center items-center shadow-2xl sticky top-0 z-10 bg-white'>
-          <div className='w-10/12'>
-            {/* Header */}
-            <Header />
-          </div>
+    <div className="flex flex-col gap-8 w-full h-full bg-gray-100">
+      {/* Header */}
+      <div className='w-full flex justify-center items-center shadow-2xl sticky top-0 z-10 bg-white'>
+        <div className='w-10/12'>
+          {/* Header */}
+          <Header />
         </div>
+      </div>
 
+      <div className='w-full h-screen flex flex-col gap-8  pb-8'>
+
+        {/* first */}
         <div className='flex justify-center items-center w-full'>
-          <div className='w-10/12 flex justify-between h-[65vh]'>
+          <div className='w-10/12 flex justify-between h-[70vh]'>
             <div className='w-5/12 flex flex-col gap-8 justify-center h-full'>
               <h2 className='text-textColor text-3xl font-semibold'>Paradise View</h2>
               <h1 className='text-black text-5xl font-bold'>Hotel for every <br /> moment rich in <br /> emotion</h1>
               <p className='text-sm'>Every moment feels like the first time <br /> in paradise view </p>
               <div className='w-fit'> <Button param="Book Now" style="rounded-lg" /></div>
             </div>
-            <div className='w-5/12 relative'>
+            <div className='w-5/12 h-full lg:h-[80vh] relative'>
               <Image
                 src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="banner"
@@ -35,17 +39,19 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className='w-full flex justify-center items-center sticky top-24 z-9'>
-          <div className='w-10/12'>
-            {/* MenuFilter */}
-            <div><MenuFilter /></div>
-          </div>
+      {/* menu filter */}
+      <div className='lg:-mt-72 w-full flex justify-center items-center sticky top-24 z-20'>
+        <div className='w-10/12'>
+          {/* MenuFilter */}
+          <div><MenuFilter /></div>
         </div>
       </div>
 
+      {/* second */}
       {/* facility */}
-      <div className='flex flex-col gap-8 w-full h-full justify-center items-center'>
+      <div className='flex flex-col gap-8 w-full h-full justify-center items-center mt-12'>
         <div className='flex flex-col gap-4 justify-center items-center w-10/12'>
           <h2 className='text-2xl font-bold text-black'>Our Facilities</h2>
           <p className='text-black text-base'>We offer modern (5 star) hotel facilities for your comfort.</p>
@@ -61,6 +67,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* third */}
       {/* banner */}
       <div className='flex flex-col gap-8 w-full h-full justify-center items-center py-4'
         style={{
@@ -84,8 +91,8 @@ const Home = () => {
                     src={rd.img}
                     alt={rd.des} // Use a descriptive alt text
                     fill
-                    className='object-cover rounded-lg'
-                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' // Optimize for different screen sizes
+                    className='object-cover rounded-lg z-8'
+                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' 
                   />
                   <div className='absolute bottom-0 w-fit h-fit right-6 p-4 bg-textColor text-white top-6 rounded-lg'>
                     {rd.available} Rooms available
@@ -96,7 +103,13 @@ const Home = () => {
             ))}
           </div>
         </div>
+      </div>
 
+
+      {/* footer */}
+      <div className="w-full h-full">
+
+        <Footer />
       </div>
     </div>
   )
