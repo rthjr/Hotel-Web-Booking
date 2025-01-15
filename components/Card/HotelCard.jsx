@@ -13,8 +13,8 @@ const HotelCard = () => {
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-textColor">
       {HotelData.map((hotel) => (
-        <div key={hotel.id} className="flex flex-col gap-2 shadow-2xl">
-          <img src={hotel.image} alt="Hotel" />
+        <div key={hotel.id} className="flex flex-col gap-2 shadow-2xl rounded-xl">
+          <img src={hotel.image} alt="Hotel" className="h-52 rounded-t-lg "/>
           <div className="flex flex-col gap-4 p-4">
             <div className="flex justify-between">
               <h2>{hotel.name}</h2>
@@ -36,7 +36,7 @@ const HotelCard = () => {
                   <FaWifi size={20} />
                 </div>
               </div>
-              <Button param="Book Now"/>
+              <Button param="Book Now" />
             </div>
           </div>
         </div>
