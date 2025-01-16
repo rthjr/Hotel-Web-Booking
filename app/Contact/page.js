@@ -1,3 +1,4 @@
+import BannerContact from '@components/Banners/BannerContact'
 import Footer from '@components/layout/Footer'
 import Header from '@components/layout/Header'
 import React from 'react'
@@ -14,6 +15,9 @@ const page = () => {
             </div>
             <div className='flex flex-col gap-8'>
                 {/* banner */}
+                <div>
+                    <BannerContact />
+                </div>
                 <section className="bg-gray-100">
                     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">

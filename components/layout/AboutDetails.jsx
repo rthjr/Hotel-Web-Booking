@@ -6,7 +6,7 @@ const AboutDetails = () => {
     <>
       <div className=" w-12/12 flex justify-between">
         <div className="w-6/12 flex flex-col justify-center items-center gap-4">
-          <div className="relative w-5/12 h-full lg:h-[50vh]">
+          <div className="relative w-6/12 h-full lg:h-[50vh]">
             <div className="absolute top-0 left-0 w-full h-full translate-x-7 -translate-y-7 bg-bgDarkColor"></div>
             <Image
               src="/image/manager.jpg"
@@ -18,7 +18,7 @@ const AboutDetails = () => {
             />
           </div>
           <div>
-            <h1>sdfdssd</h1>
+            <h1>CEO</h1>
           </div>
         </div>
         <div className="w-6/12  flex flex-col justify-center items-center gap-4 p-6">

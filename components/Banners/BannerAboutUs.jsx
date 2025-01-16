@@ -13,8 +13,8 @@ const BannerAboutUs = () => {
             backgroundPosition: "center",
           }}
         >
-          <div className="w-full h-screen bg-yellow-900 bg-opacity-30 flex justify-center items-center">
-          <div className="flex flex-col justify-center items-center text-white">
+          <div className="w-full h-screen bg-bgDarkColor bg-opacity-50 flex justify-center items-center">
+          <div className="flex flex-col justify-center items-center text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_60%)] ">
             <div className="w-5/12 grid place-items-center">
             <h1 className="text-5xl font-bold">About Us</h1>
             <p className="mt-10">
