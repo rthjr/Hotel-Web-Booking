@@ -1,5 +1,4 @@
 import React from "react";
-
 // component
 import { HotelData } from "@/data/HotelData";
 import { Button } from "../layout/Button";
@@ -8,8 +7,7 @@ import { Button } from "../layout/Button";
 import { FaTv } from "react-icons/fa";
 import { PiShower } from "react-icons/pi";
 import { FaWifi } from "react-icons/fa6";
-
-const HotelCard = () => {
+const HotelCard = ({Rooms}) => {
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-textColor">
       {HotelData.map((hotel) => (
@@ -36,7 +34,7 @@ const HotelCard = () => {
                   <FaWifi size={20} />
                 </div>
               </div>
-              <Button param="Book Now" />
+              <Button Rooms={Rooms} param="Expore" />
             </div>
           </div>
         </div>

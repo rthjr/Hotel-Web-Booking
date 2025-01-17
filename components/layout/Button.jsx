@@ -2,11 +2,11 @@
 
 import React from "react";
 import { useRouter } from "@node_modules/next/navigation";
-export const Button = ({ param, handleRoom, style }) => {
+export const Button = ({ param, style, Rooms }) => {
   return (
     <button
       className={` group relative inline-block text-sm font-medium text-textColor focus:outline-none focus:ring active:text-textColor`}
-      onClick={handleRoom}
+      onClick={Rooms} 
     >
       <span
         className={`${style} absolute inset-0 translate-x-0 translate-y-0 bg-textColor transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5`}

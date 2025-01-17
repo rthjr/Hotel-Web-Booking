@@ -12,9 +12,8 @@ const Header = () => {
   const router = useRouter();
 
   const handleRoom = () => {
-    router.push("/Rooms");
+    router.push("/HotelCards/Rooms");
   }
- 
   return (
   <div className="sticky top-0">
     <div className="flex justify-between items-center p-4 ">
@@ -34,7 +33,7 @@ const Header = () => {
           <Link href="/Explore">Explore</Link>
         </li>
         <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
-          <Link href="/Rooms">Rooms</Link>
+          <Link href="/HotelCards">Hotel</Link>
         </li>
         <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
           <Link href="/About">About</Link>
@@ -42,9 +41,12 @@ const Header = () => {
         <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
           <Link href="/Contact">Contact</Link>
         </li>
+        <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
+          <Link href="/HotelCards/Rooms">Room</Link>
+        </li>
       </ul>
       {/* login */}
-      <Button param = "Book Now" handleRoom={handleRoom} style="rounded-xl"/>
+      <Button param = "Book Now" Rooms={handleRoom} style="rounded-xl"/>
     </div>
   </div>
   );
