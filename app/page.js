@@ -111,7 +111,6 @@ const Home = () => {
 
       {/* footer */}
       <div className="w-full h-full">
-
         <Footer />
       </div>
     </div>

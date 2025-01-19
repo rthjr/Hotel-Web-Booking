@@ -1,0 +1,6 @@
+1.change room to hotel and in hotelCard have alot more Rooms
+2.in each room have information about the room and we can book
+3.in each room we can select optoins and we can input information user
+4.payment process by cash amount
+5.in hander add more optoins is All_room 
+6.page for cooked and have page to display the details of the booked room 
