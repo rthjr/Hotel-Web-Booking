@@ -1,13 +1,44 @@
+"use client";
+
 import React from "react";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  // store in state
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res.error) {
+        setError("Invalid Credentials");
+        return;
+      }
+
+      router.replace("dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="font-[sans-serif] max-sm:px-4">
         <div className="min-h-screen flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 items-center gap-4 max-md:gap-8 max-w-6xl max-md:max-w-lg w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
             <div className="md:max-w-md w-full px-4 py-4">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-12">
                   <h3 className="text-gray-800 text-3xl font-extrabold">
                     Sign in
@@ -30,6 +61,7 @@ const LoginForm = () => {
                   <div className="relative flex items-center">
                     <input
                       name="email"
+                      onChange={(e) => setEmail(e.target.value)}
                       type="text"
                       required
                       className="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 pl-2 pr-8 py-3 outline-none"
@@ -78,10 +110,11 @@ const LoginForm = () => {
                     <input
                       name="password"
                       type="password"
-                      required
+                      onChange={(e) => setPassword(e.target.value)}
                       className="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 pl-2 pr-8 py-3 outline-none"
                       placeholder="Enter password"
                     />
+
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#bbb"
@@ -124,12 +157,18 @@ const LoginForm = () => {
 
                 <div className="mt-12">
                   <button
-                    type="button"
+                    type="submit"
                     className="w-full shadow-xl py-2.5 px-4 text-sm tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
                   >
                     Sign in
                   </button>
                 </div>
+
+                {error && (
+                  <div className="text-center text-red-600 font-medium">
+                    ({error})
+                  </div>
+                )}  
 
                 <div className="my-4 flex items-center gap-4">
                   <hr className="w-full border-gray-300" />

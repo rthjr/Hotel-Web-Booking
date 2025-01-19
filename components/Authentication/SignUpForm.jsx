@@ -1,6 +1,78 @@
+"use client";
+
+import { useRouter } from "@node_modules/next/navigation";
+import { useState } from "react";
+
 import React from "react";
 
 const SignUpForm = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const router = useRouter();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Check if all fields are filled
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      setError("All fields are necessary!");
+      return;
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+
+    try {
+      const resUserExists = await fetch("api/userExists", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const { user } = await resUserExists.json();
+
+      if (user) {
+        setError("User already exists.");
+        return;
+      }
+
+      const res = await fetch("api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+        }),
+      });
+
+      if (res.ok) {
+        setError(""); // Clear any previous errors
+        const form = e.target;
+        form.reset();
+        
+        router.push("/login");
+      } else {
+        setError("User registration failed.");
+      }
+    } catch (error) {
+      console.error("Error during Registration: ", error);
+      setError("An error occurred. Please try again later.");
+    }
+  };
+
   return (
     <section className="bg-white">
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -69,7 +141,10 @@ const SignUpForm = () => {
               </p>
             </div>
 
-            <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 grid grid-cols-6 gap-6"
+            >
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="FirstName"
@@ -82,6 +157,7 @@ const SignUpForm = () => {
                   type="text"
                   id="FirstName"
                   name="first_name"
+                  onChange={(e) => setFirstName(e.target.value)}
                   className="mt-1 w-full rounded-md bg-white text-sm text-gray-700 shadow-sm p-4 border-2 border-textColor"
                 />
               </div>
@@ -98,6 +174,7 @@ const SignUpForm = () => {
                   type="text"
                   id="LastName"
                   name="last_name"
+                  onChange={(e) => setLastName(e.target.value)}
                   className="mt-1 w-full rounded-md  p-4 border-2 border-textColor bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
@@ -115,6 +192,7 @@ const SignUpForm = () => {
                   type="email"
                   id="Email"
                   name="email"
+                  onChange={(e) => setEmail(e.target.value)}
                   className="mt-1 w-full rounded-md  p-4 border-2 border-textColor bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
@@ -132,6 +210,7 @@ const SignUpForm = () => {
                   type="password"
                   id="Password"
                   name="password"
+                  onChange={(e) => setPassword(e.target.value)}
                   className="mt-1 w-full rounded-md  p-4 border-2 border-textColor bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
@@ -148,8 +227,13 @@ const SignUpForm = () => {
                   type="password"
                   id="PasswordConfirmation"
                   name="password_confirmation"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   className="mt-1 w-full rounded-md  p-4 border-2 border-textColor bg-white text-sm text-gray-700 shadow-sm"
                 />
+
+                {confirmPassword && confirmPassword !== password && (
+                  <span className="text-red-600">Password does not match!</span>
+                )}
               </div>
 
               <div className="col-span-6">
@@ -187,6 +271,8 @@ const SignUpForm = () => {
                 <button className="inline-block shrink-0 rounded-md border border-textColor bg-textColor px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-textColor focus:outline-none focus:ring active:text-blue-500">
                   Create an account
                 </button>
+
+                {error && <span>Check all the input!</span>}
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Already have an account?

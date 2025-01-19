@@ -3,7 +3,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Button } from "./Button";
+import { Button, LoginButton } from "./Button";
 import Image from "@node_modules/next/image";
 import { useRouter } from "@node_modules/next/navigation";
 
@@ -40,15 +40,18 @@ const Header = () => {
         </li>
         <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
           <Link href="/Contact">Contact</Link>
-        </li>
+        </li>npm i
         <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
           <Link href="/HotelCards/Rooms">Room</Link>
         </li>
       </ul>
+
       {/* login */}
       <Button param = "Book Now" Rooms={handleRoom} style="rounded-xl"/>
+
+      <LoginButton/>
     </div>
-  </div>
+  </div>  
   );
 };
 

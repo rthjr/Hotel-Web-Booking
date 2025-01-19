@@ -1,15 +1,60 @@
-import NextAuth from "next-auth"
-import GithubProvider from "next-auth/providers/github"
+import { connectMongoDB } from "@/lib/mongodb";
+import User from "@/models/user";
+import NextAuth from "next-auth/next";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
 
 export const authOptions = {
-    // Configure one or more authentication providers
-    providers: [
-        GithubProvider({
-            clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET,
-        }),
-        // ...add more providers here
-    ],
-}
+  providers: [
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {},
 
-export default NextAuth(authOptions)
+      async authorize(credentials) {
+        const { email, password } = credentials;
+
+        try {
+          await connectMongoDB();
+          const user = await User.findOne({ email });
+
+          if (!user) {
+            return null;
+          }
+
+          const passwordsMatch = await bcrypt.compare(password, user.password);
+
+          if (!passwordsMatch) {
+            return null;
+          }
+
+          return user;
+        } catch (error) {
+          console.log("Error: ", error);
+        }
+      },
+    }),
+  ],
+  callbacks: {
+    async session({ session, token }) {
+      session.user.lastName = token.lastName || "Doe"; 
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.lastName = user.lastName || "Doe"; 
+      }
+      return token;
+    },
+  },
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/",
+  },
+};
+
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
