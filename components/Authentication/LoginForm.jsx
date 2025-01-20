@@ -26,7 +26,7 @@ const LoginForm = () => {
         return;
       }
 
-      router.replace("dashboard");
+      router.replace("/");
     } catch (error) {
       console.log(error);
     }

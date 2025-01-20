@@ -1,7 +1,7 @@
 
 
 import "@styles/globals.css";
-import { AuthProvider } from "./Providers";
+import { AuthProvider } from "@Providers";
 
 export const metadata = {
   title: "Hotel Booking",

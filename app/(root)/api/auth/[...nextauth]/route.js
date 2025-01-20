@@ -36,15 +36,18 @@ export const authOptions = {
   ],
   callbacks: {
     async session({ session, token }) {
-      session.user.lastName = token.lastName || "Doe"; 
+      session.user.lastName = token.lastName || "Doe";
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.lastName = user.lastName || "Doe"; 
+        token.lastName = user.lastName || "Doe";
       }
       return token;
     },
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    }
   },
   session: {
     strategy: "jwt",
