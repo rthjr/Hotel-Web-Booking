@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRouter } from "@node_modules/next/navigation";
-export const Button = ({ param, style, Rooms }) => {
+export const Button = ({ param, style, Rooms, }) => {
   return (
     <button
       className={` group relative inline-block text-sm font-medium text-textColor focus:outline-none focus:ring active:text-textColor`}
@@ -57,3 +57,17 @@ export const LoginButton = () => {
     </div>
   );
 };
+
+export const BtnRoomDetails = () => {
+  const router = useRouter();
+  return (
+    <div>
+      <button className="w-full py-2 text-white bg-bgDarkColor rounded-md hover:bg-[#6F6238] focus:outline-none focus:ring-2 focus:ring-[#857749]"
+      onClick={() => router.push("/HotelCards/Rooms/RoomDetails")}
+      >
+        Book Now
+      </button>
+    </div>
+  );
+
+}

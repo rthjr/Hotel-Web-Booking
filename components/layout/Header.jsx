@@ -40,7 +40,7 @@ const Header = () => {
         </li>
         <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
           <Link href="/Contact">Contact</Link>
-        </li>npm i
+        </li>
         <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
           <Link href="/HotelCards/Rooms">Room</Link>
         </li>
