@@ -1,11 +1,11 @@
-import { Button } from '@components/layout/Button'
-import Header from '@components/layout/Header'
-import MenuFilter from '@components/layout/MenuFilter'
+import { Button } from '@components/user/layout/Button'
+import Header from '@components/user/layout/Header'
+import MenuFilter from '@components/user/layout/MenuFilter'
 import React from 'react'
 import Image from '@node_modules/next/image'
 import { FacilitiesHotel } from '@data/HotelData'
 import { RoomDetail } from '@data/HotelData'
-import Footer from '@components/layout/Footer'
+import Footer from '@components/user/layout/Footer'
 
 const Home = () => {
   return (
@@ -13,7 +13,8 @@ const Home = () => {
     // website
     <div className="flex flex-col gap-8 w-full h-full bg-gray-100">
       {/* Header */}
-      <div className='w-full flex justify-center items-center shadow-2xl sticky top-0 z-10 bg-white'>
+      <div className='w-full flex justify-center items-center shadow-2xl sticky top-0 z-[9999] bg-white'>
+        
         <div className='w-10/12'>
           {/* Header */}
           <Header />
@@ -61,7 +62,7 @@ const Home = () => {
 
         <div className="w-10/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-textColor">
           {FacilitiesHotel.map((fh) => (
-            <div className="flex flex-col items-center justify-center gap-4 p-8 rounded-lg bg-white w-52 h-52 hover:bg-textColor hover:text-white transition-all" key={fh.id}>
+            <div className="flex flex-col items-center justify-center gap-4 p-8 rounded-lg bg-white h-52 hover:bg-textColor hover:text-white transition-all w-full" key={fh.id}>
               <span>{fh.icon}</span>
               <span>{fh.facility}</span>
             </div>
@@ -90,12 +91,12 @@ const Home = () => {
               <div className='flex flex-col gap-4 p-4 bg-white rounded-lg' key={rd.id}>
                 <div className='relative aspect-square'> {/* Adjust aspect ratio as needed */}
                   <Image
-                  
+
                     src={rd.img}
-                    alt={rd.des} 
+                    alt={rd.des}
                     fill
                     className='object-cover rounded-lg z-8'
-                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' 
+                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                   />
                   <div className='absolute bottom-0 w-fit h-fit right-6 p-4 bg-textColor text-white top-6 rounded-lg'>
                     {rd.available} Rooms available

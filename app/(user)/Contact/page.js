@@ -1,6 +1,6 @@
-import BannerContact from '@components/Banners/BannerContact'
-import Footer from '@components/layout/Footer'
-import Header from '@components/layout/Header'
+import BannerContact from '@components/user/Banners/BannerContact'
+import Footer from '@components/user/layout/Footer'
+import Header from '@components/user/layout/Header'
 import React from 'react'
 
 const page = () => {

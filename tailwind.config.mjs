@@ -14,10 +14,12 @@ export default {
         buttonColor: '#7C6A46',
         textColor: '#7C6A46',
         bgColor: '#F5F5F5',
-        bgColorFooter:'#857749',
-        bgDarkColor:'#857749',
+        bgColorFooter: '#857749',
+        bgDarkColor: '#857749',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // require('daisyui'),
+  ],
 };

@@ -1,7 +1,7 @@
-import BannerExplore from '@components/Banners/BannerExplore'
+import BannerExplore from '@components/user/Banners/BannerExplore'
 import Explore from '@components/Card/Explore'
-import Footer from '@components/layout/Footer'
-import Header from '@components/layout/Header'
+import Footer from '@components/user/layout/Footer'
+import Header from '@components/user/layout/Header'
 import React from 'react'
 
 const page = () => {

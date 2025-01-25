@@ -5,28 +5,37 @@ import Link from "next/link";
 import { Button, LoginButton } from "./Button"; // Ensure these are correctly defined
 import Image from "next/image"; // Corrected import
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react"; // Import signOut
+import { RxAvatar } from "react-icons/rx";
 
 const Header = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [isLogin, setIsLogin] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
 
   useEffect(() => {
     if (status === "authenticated") {
       setIsLogin(true);
+      if (session?.user) {
+        setUserName(session.user.lastName || "");
+      }
     } else if (status === "unauthenticated") {
       setIsLogin(false);
+      setUserName("");
     }
-  }, [status]);
+  }, [status, session]);
 
-  const handleRoom = () => {
-    router.push("/HotelCards/Rooms");
+  // Handle logout
+  const handleLogout = async () => {
+    await signOut({ redirect: false }); // Sign out without redirect
+    router.push("/"); // Redirect to home page after logout
   };
 
   return (
     <div className="sticky top-0">
-      <div className="flex justify-between items-center p-4">
+      <div className="flex justify-between items-center py-4">
         <Link href="#">
           <Image src="/logo/logo.png" alt="logo" width={100} height={100} />
         </Link>
@@ -52,7 +61,30 @@ const Header = () => {
         </ul>
 
         {isLogin ? (
-          <Button param="Book Now" Rooms={handleRoom} style="rounded-xl" />
+          <div className="flex justify-between items-center gap-4 relative">
+            {/* Avatar with dropdown toggle */}
+            <div
+              className="flex gap-2 justify-center items-center border-2 border-textColor text-textColor p-1 rounded-lg cursor-pointer"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggle dropdown
+            >
+              <RxAvatar size={30} />
+              <p>{userName}</p>
+            </div>
+
+            {/* Dropdown menu */}
+            {isDropdownOpen && (
+              <div className="absolute top-12 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-[1000]">
+                <ul>
+                  <li
+                    className="px-4 py-2 cursor-pointer"
+                    onClick={handleLogout}
+                  >
+                    Log out
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         ) : (
           <LoginButton />
         )}
