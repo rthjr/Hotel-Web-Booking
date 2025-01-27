@@ -1,18 +1,44 @@
-"use client"
-import React from 'react'
-import { useRouter } from '@node_modules/next/navigation'
+"use client";
+import React from "react";
+import { useRouter } from "@node_modules/next/navigation";
+import Header from "@components/layout/Header";
+import Footer from "@components/layout/Footer";
+import Rooms from "@components/Card/Rooms";
 const page = () => {
-    const router = useRouter();
-    const handleBack = () => {
-        router.back();
-    }
+  const router = useRouter();
+  const handleBack = () => {
+    router.back();
+  };
   return (
-    <div>
-      <h1>Page 2</h1>
-      <p>This is the second page.</p>
-      <button onClick={handleBack}>Back</button>
-    </div>
-  )
-}
+    <div className="w-full flex flex-col justify-between gap-8 min-h-screen">
+      <div className="w-full flex flex-col justify-center items-center">
+        <div className="w-full flex justify-center items-center shadow-2xl">
+          <div className="w-10/12">
+            {/* Header */}
+            <Header />
+          </div>
+        </div>
 
-export default page
+        <div className="w-full">
+          <div className="w-full flex justify-center items-center">
+            <div className="w-full">{/* Banner */}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full flex justify-center items-center">
+        <div className="w-10/12">
+          <Rooms Rooms={handleBack} />
+        </div>
+      </div>
+
+      <div className="w-full flex justify-center items-center">
+        <div className="w-full">
+          <Footer />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default page;

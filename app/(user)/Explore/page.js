@@ -31,8 +31,6 @@ const page = () => {
                     </div>
                 </div>
 
-
-
                 <div className="w-full h-full ">
                     <Footer />
                 </div>
