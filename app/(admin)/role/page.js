@@ -1,8 +1,8 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import { useSession } from 'next-auth/react';
 import { useRouter } from "@node_modules/next/navigation";
+import Topbar from "@components/owner/component/layout/Topbar";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -93,37 +93,48 @@ const UserManagement = () => {
   );
 
   return (
-    <div>
-      <h1>User Management</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Change Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user._id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>
-                <select
-                  value={user.role}
-                  onChange={(e) => handleRoleChange(user._id, e.target.value)}
+
+    <div className="flex justify-center items-center w-full​ h-full">
+      <main className="w-10/12 ">
+
+        <div>
+          <Topbar />
+        </div>
+        <div className="w-full min-h-screen flex flex-col justify-center ">
+          <h1>User Management</h1>
+          <table className="w-full border border-gray-300 text-left mb-4">
+            <thead>
+              <tr className="bg-gray-300">
+                <th className="p-2 border border-gray-300">Name</th>
+                <th className="p-2 border border-gray-300">Email</th>
+                <th className="p-2 border border-gray-300">Role</th>
+                <th className="p-2 border border-gray-300">Change Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <tr key={index}
+                  className={index % 2 === 0 ? "bg-white" : "bg-gray-200"}
                 >
-                  <option value="User">User</option>
-                  <option value="Owner">Owner</option>
-                  <option value="Admin">Admin</option>
-                </select>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                  <td>
+                    <select
+                      value={user.role}
+                      onChange={(e) => handleRoleChange(user._id, e.target.value)}
+                    >
+                      <option value="User">User</option>
+                      <option value="Owner">Owner</option>
+                      <option value="Admin">Admin</option>
+                    </select>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </main>
     </div>
   );
 };
