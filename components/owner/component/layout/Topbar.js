@@ -1,0 +1,35 @@
+
+import Link from '@node_modules/next/link';
+import React from 'react'
+import { FaHome } from "react-icons/fa";
+const Topbar = () => {
+    return (
+        <>
+            <div className="p-4">
+                <div className="sm:hidden">
+                    <label htmlFor="Tab" className="sr-only">Tab</label>
+
+                    <select id="Tab" className="w-full rounded-md border-2 border-textColor">
+                        <option className='flex flex-col gap-1'>
+                            <FaHome size={30} color='black' />
+                            <span>Home</span>
+                        </option>
+                    </select>
+                </div>
+
+                <div className="hidden sm:block">
+                    <div className="border-b border-gray-200">
+                        <nav className="-mb-px flex gap-6">
+                            <Link href="/"
+                                className="shrink-0 rounded-t-lg border border-gray-300 border-b-white p-3 text-sm font-medium text-black">
+                                Home
+                            </Link>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default Topbar

@@ -4,7 +4,6 @@
       "id": "1",
       "name": "Hotel 1",
       "available": "Yes",
-      "price": "50$",
       "image": "/image/HotelImage.jpg",
       "reservations": [
         {
@@ -16,7 +15,8 @@
           "endDay": "2025-01-27",
           "people": 2,
           "image": "/image/HotelImage.jpg",
-          "floor": "1"
+          "floor": "1",
+          "price": 65
         },
         {
           "id": "102",
@@ -27,7 +27,8 @@
           "endDay": "2025-01-28",
           "people": 4,
           "image": "/image/HotelImage.jpg",
-          "floor": "2"
+          "floor": "2",
+          "price": null
         },
         {
           "id": "103",
@@ -38,30 +39,106 @@
           "endDay": "2025-01-29",
           "people": 1,
           "image": "/image/HotelImage.jpg",
-          "floor": "3"
+          "floor": "3",
+          "price": 45
         }
       ]
     },
     {
       "id": "2",
       "name": "Hotel 2",
-      "available": "No",
-      "price": "100$",
-      "image": "/image/HotelImage2.avif"
+      "available": "Yes",
+      "image": "/image/HotelImage2.jpg",
+      "reservations": [
+        {
+          "id": "201",
+          "email": "michael.brown@example.com",
+          "name": "Michael Brown",
+          "status": "paid",
+          "startDay": "2025-02-10",
+          "endDay": "2025-02-12",
+          "people": 3,
+          "image": "/image/HotelImage2.jpg",
+          "floor": "1",
+          "price": 200
+        },
+        {
+          "id": "202",
+          "email": "emily.jones@example.com",
+          "name": "Emily Jones",
+          "status": "none",
+          "startDay": "2025-02-11",
+          "endDay": "2025-02-13",
+          "people": 2,
+          "image": "/image/HotelImage2.jpg",
+          "floor": "2",
+          "price": 180
+        }
+      ]
     },
     {
       "id": "3",
       "name": "Hotel 3",
       "available": "Yes",
-      "price": "120$",
-      "image": "/image/HotelImage8.jpg"
+      "image": "/image/HotelImage3.jpg",
+      "reservations": [
+        {
+          "id": "301",
+          "email": "david.wilson@example.com",
+          "name": "David Wilson",
+          "status": "paid",
+          "startDay": "2025-03-05",
+          "endDay": "2025-03-07",
+          "people": 4,
+          "image": "/image/HotelImage3.jpg",
+          "floor": "1",
+          "price": 250
+        },
+        {
+          "id": "302",
+          "email": "sarah.miller@example.com",
+          "name": "Sarah Miller",
+          "status": "none",
+          "startDay": "2025-03-06",
+          "endDay": "2025-03-08",
+          "people": 1,
+          "image": "/image/HotelImage3.jpg",
+          "floor": "2",
+          "price": 100
+        }
+      ]
     },
     {
       "id": "4",
       "name": "Hotel 4",
-      "available": "No",
-      "price": "140$",
-      "image": "/image/HotelImage3.jpg"
+      "available": "Yes",
+      "image": "/image/HotelImage4.jpg",
+      "reservations": [
+        {
+          "id": "401",
+          "email": "robert.taylor@example.com",
+          "name": "Robert Taylor",
+          "status": "paid",
+          "startDay": "2025-04-15",
+          "endDay": "2025-04-17",
+          "people": 2,
+          "image": "/image/HotelImage4.jpg",
+          "floor": "1",
+          "price": 300
+        },
+        {
+          "id": "402",
+          "email": "laura.white@example.com",
+          "name": "Laura White",
+          "status": "none",
+          "startDay": "2025-04-16",
+          "endDay": "2025-04-18",
+          "people": 3,
+          "image": "/image/HotelImage4.jpg",
+          "floor": "2",
+          "price": 270
+        }
+      ]
     },
     {
       "id": "5",

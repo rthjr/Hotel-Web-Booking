@@ -53,7 +53,7 @@ const Header = () => {
             {hotelId && (
                 <div className="sticky top-0">
                     <div className="flex flex-col gap-8 items-center p-8 justify-start min-h-screen bg-gray-200">
-                        <Link href="#">
+                        <Link href="/">
                             <Image src="/logo/logo.png" alt="logo" width={150} height={150} />
                         </Link>
                         <ul className="flex gap-8 flex-col">
@@ -77,9 +77,18 @@ const Header = () => {
                                 <span className="font-bold">Dashboard</span>
                                 <li
                                     className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor"
-                                    onClick={handleReportClick} // Trigger action for Report
+                                    onClick={handleReportClick} 
                                 >
                                     <Link href="#">Report</Link>
+                                </li>
+                            </div>
+
+                            <div className="flex flex-col gap-4">
+                                <span className="font-bold">Home Page</span>
+                                <li
+                                    className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor"
+                                >
+                                    <Link href="/">Home</Link>
                                 </li>
                             </div>
                         </ul>

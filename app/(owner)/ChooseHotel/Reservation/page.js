@@ -151,7 +151,7 @@ export default function ReservationManagement() {
           <div className="mb-6">
             <input
               type="text"
-              placeholder="Filter by guest name or email"
+              placeholder="Enter here!"
               className="p-2 border border-gray-300 rounded-md mr-4"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}

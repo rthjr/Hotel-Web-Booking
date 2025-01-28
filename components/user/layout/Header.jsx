@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Button, LoginButton } from "./Button"; // Ensure these are correctly defined
+import { Button, LoginButton } from "./Button";
 import Image from "next/image"; // Corrected import
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react"; // Import signOut

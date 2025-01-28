@@ -1,5 +1,5 @@
 import BannerExplore from '@components/user/Banners/BannerExplore'
-import Explore from '@components/Card/Explore'
+import Explore from '@components/user/Card/Explore'
 import Footer from '@components/user/layout/Footer'
 import Header from '@components/user/layout/Header'
 import React from 'react'
