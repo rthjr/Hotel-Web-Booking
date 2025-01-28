@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useRouter } from "@node_modules/next/navigation";
-import { BtnRoomDetails } from "@components/layout/Button";
+import { BtnRoomDetails } from "../layout/Button";
 import { RoomData } from "@/data/RoomData";
 
 const Rooms = () => {

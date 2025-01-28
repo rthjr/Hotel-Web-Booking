@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { useRouter } from "@node_modules/next/navigation";
-import Header from "@components/layout/Header";
-import Footer from "@components/layout/Footer";
-import Rooms from "@components/Card/Rooms";
+import Footer from "@components/user/layout/Footer";
+import Header from "@components/user/layout/Header";
+import Rooms from "@components/user/Card/Rooms";
 const page = () => {
   const router = useRouter();
   const handleBack = () => {
