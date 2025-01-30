@@ -19,28 +19,16 @@
           "price": 65
         },
         {
-          "id": "102",
-          "email": "jane.smith@example.com",
-          "name": "Jane Smith",
-          "status": "none",
-          "startDay": "2025-01-26",
-          "endDay": "2025-01-28",
-          "people": 4,
-          "image": "/image/HotelImage.jpg",
-          "floor": "2",
-          "price": null
-        },
-        {
           "id": "103",
-          "email": "alice.wilson@example.com",
-          "name": "Alice Wilson",
+          "email": "michael.lee@example.com",
+          "name": "Michael Lee",
           "status": "paid",
-          "startDay": "2025-01-27",
-          "endDay": "2025-01-29",
+          "startDay": "2025-03-05",
+          "endDay": "2025-03-10",
           "people": 1,
           "image": "/image/HotelImage.jpg",
           "floor": "3",
-          "price": 45
+          "price": 50
         }
       ]
     },

@@ -47,6 +47,21 @@ export default function ReservationManagement() {
     }
   };
 
+
+  // for delete data from api
+  const deletePost = async (id) => {
+    const response = await fetch(`/api/owner/${id}`, {
+      method: "DELETE",
+    })
+
+    if (response.ok) {
+      console.log("Post delete successfully")
+      fetchData()
+    } else {
+      console.error("Fail to delete the post");
+    }
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -81,8 +96,6 @@ export default function ReservationManagement() {
   };
 
   const handleDelete = (reservationId) => {
-    alert(`Delete reservation ${reservationId}`);
-    // Close the dropdown after action
     setDropdownOpen({ ...dropdownOpen, [reservationId]: false });
   };
 
@@ -259,7 +272,10 @@ export default function ReservationManagement() {
                                 <li>
                                   <button
                                     className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
-                                    onClick={() => handleDelete(reservation.id)}
+                                    onClick={() => {
+                                      deletePost(reservation.id)
+                                      handleDelete(reservation.id)
+                                    }}
                                   >
                                     Delete
                                   </button>
