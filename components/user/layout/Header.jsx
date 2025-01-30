@@ -13,7 +13,7 @@ const Header = () => {
   const { data: session, status } = useSession();
   const [isLogin, setIsLogin] = useState(false);
   const [userName, setUserName] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -57,6 +57,13 @@ const Header = () => {
           </li>
           <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
             <Link href="/HotelCards/Rooms">Room</Link>
+          </li>
+          <li>
+            {
+              userName === "owner" &&  (
+                <Link href="/ChooseHotel">Management</Link>
+              )
+            }
           </li>
         </ul>
 
