@@ -1,4 +1,4 @@
-"use client"; // Ensures this component is rendered on the client side
+
 
 import React from 'react';
 import HotelCard from '@components/owner/component/Card/HotelCard';
