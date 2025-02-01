@@ -4,7 +4,8 @@ import HotelCard from '@components/user/Card/HotelCard'
 import Header from '@components/user/layout/Header'
 import Footer from '@components/user/layout/Footer'
 import BannerRoom from '@components/user/Banners/BannerRoom'
-import { useRouter } from '@node_modules/next/navigation'
+import { useRouter } from "@node_modules/next/navigation";
+
 const page = () => {
     const router = useRouter();
     const handleRoom = () => { router.push("/HotelCards/Rooms") }

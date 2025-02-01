@@ -10,12 +10,13 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-
         buttonColor: '#7C6A46',
         textColor: '#7C6A46',
         bgColor: '#F5F5F5',
         bgColorFooter: '#857749',
         bgDarkColor: '#857749',
+        bgNavColor: '#e8e9d8',
+        bgtextColor: '#f5f6f0',
       },
     },
   },
