@@ -22,7 +22,7 @@ const page = () => {
       </div>
 
       <div className="w-full flex justify-center items-center">
-        <div className="w-10/12">
+        <div className="w-11/12">
            <div>
               <RoomDetails/>
            </div>

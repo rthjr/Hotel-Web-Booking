@@ -3,7 +3,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Button, LoginButton } from "./Button";
+import { Button ,LoginButton} from "@components/user/layout/Button";
 import Image from "@node_modules/next/image";
 import { useRouter } from "@node_modules/next/navigation";
 

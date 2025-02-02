@@ -31,7 +31,6 @@ const page = () => {
           <Rooms Rooms={handleBack} />
         </div>
       </div>
-
       <div className="w-full flex justify-center items-center">
         <div className="w-full">
           <Footer />
