@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useSession } from 'next-auth/react';
 import { useRouter } from "next/navigation";
 
-export const AuthProvider = ({ children }) => {
+export const AuthPv = ({ children }) => {
     return <SessionProvider>{children}</SessionProvider>;
 };
 
