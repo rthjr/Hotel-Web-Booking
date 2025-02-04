@@ -1,37 +1,18 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Button, LoginButton } from "./Button";
-import Image from "next/image"; // Corrected import
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useSession, signOut } from "next-auth/react"; // Import signOut
 import { RxAvatar } from "react-icons/rx";
+import { FiMenu } from "react-icons/fi"; // Hamburger icon
+import { FiLogOut } from "react-icons/fi"; // Log-out icon
+import { useAuth } from "@Context/AuthContext/AuthContext";
 
 const Header = () => {
-  const router = useRouter();
-  const { data: session, status } = useSession();
-  const [isLogin, setIsLogin] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      setIsLogin(true);
-      if (session?.user) {
-        setUserName(session.user.lastName || "");
-      }
-    } else if (status === "unauthenticated") {
-      setIsLogin(false);
-      setUserName("");
-    }
-  }, [status, session]);
-
-  // Handle logout
-  const handleLogout = async () => {
-    await signOut({ redirect: false }); // Sign out without redirect
-    router.push("/"); // Redirect to home page after logout
-  };
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle menu
+  const { isLogin, userName, isDropdownOpen, setIsDropdownOpen, handleLogout } = useAuth();
 
   return (
     <div className="sticky top-0">
@@ -39,7 +20,13 @@ const Header = () => {
         <Link href="#">
           <Image src="/logo/logo.png" alt="logo" width={100} height={100} />
         </Link>
-        <ul className="flex gap-8">
+
+        {/* Hamburger Icon for small devices */}
+        <div className="lg:hidden flex items-center">
+          <FiMenu size={30} onClick={() => setIsMenuOpen(!isMenuOpen)} />
+        </div>
+
+        <ul className={`lg:flex gap-8 ${isMenuOpen ? "flex flex-col absolute bg-white top-16 left-0 w-full p-4 z-10" : "hidden"} lg:static lg:flex-row`}>
           <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
             <Link href="/">Home</Link>
           </li>
@@ -58,12 +45,15 @@ const Header = () => {
           <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
             <Link href="/HotelCards/Rooms">Room</Link>
           </li>
+          {isLogin && (
+            <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
+              <Link href="/Reservation">Reservation</Link>
+            </li>
+          )}
           <li>
-            {
-              userName === "owner" &&  (
-                <Link href="/ChooseHotel">Management</Link>
-              )
-            }
+            {userName === "owner" && (
+              <Link href="/ChooseHotel">Management</Link>
+            )}
           </li>
         </ul>
 
@@ -83,9 +73,10 @@ const Header = () => {
               <div className="absolute top-12 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-[1000]">
                 <ul>
                   <li
-                    className="px-4 py-2 cursor-pointer"
+                    className="flex items-center gap-2 px-4 py-2 cursor-pointer"
                     onClick={handleLogout}
                   >
+                    <FiLogOut size={20} /> {/* Log-out icon */}
                     Log out
                   </li>
                 </ul>

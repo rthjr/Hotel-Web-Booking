@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "@node_modules/next/navigation";
 import { useHotelContext } from "@Context/owner/ChosseHotelContext";
-import { API_ENDPOINTS } from "@utils/apiEndpoints";
+// import { API_ENDPOINTS } from "@utils/apiEndpoints";
+import { LARAVEL_ENDPOINT } from "@utils/apiEndpoints";
 import Sidebar from "@components/owner/component/layout/Sidebar";
 import Image from "@node_modules/next/image";
 
@@ -32,7 +33,7 @@ export default function ReservationManagement() {
   // Fetch data from the API
   const fetchData = async () => {
     try {
-      const res = await fetch(API_ENDPOINTS.HOTELS);
+      const res = await fetch(LARAVEL_ENDPOINT.HOTELS);
 
       if (!res.ok) {
         throw new Error("Failed to fetch Hotels");
