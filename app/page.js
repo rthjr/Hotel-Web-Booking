@@ -6,6 +6,7 @@ import Image from '@node_modules/next/image'
 import { FacilitiesHotel } from '@data/HotelData'
 import { RoomDetail } from '@data/HotelData'
 import Footer from '@components/user/layout/Footer'
+import ScrollAnimation from '@components/motion/ScrollAnimation'
 
 const Home = () => {
   return (
@@ -13,12 +14,13 @@ const Home = () => {
     // website
     <div className="flex flex-col gap-8 w-full h-full bg-gray-100">
       {/* Header */}
-      <div className='w-full flex justify-center items-center shadow-2xl sticky top-0 z-[9999] bg-white'>
-        
+      <div className='w-full flex flex-col justify-center items-center shadow-2xl sticky top-0 z-[9999] bg-white'>
+
         <div className='w-10/12'>
           {/* Header */}
           <Header />
         </div>
+        <ScrollAnimation />
       </div>
 
       <div className='w-full h-screen flex flex-col gap-8  pb-8'>
