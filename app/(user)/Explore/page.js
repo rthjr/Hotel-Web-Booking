@@ -14,7 +14,7 @@ const page = () => {
                     {/* Header */}
                     <Header />
                 </div>
-            <ScrollAnimation/>
+                <ScrollAnimation />
             </div>
 
             <div className="flex flex-col gap-8">
