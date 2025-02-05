@@ -43,7 +43,7 @@ const Header = () => {
             <Link href="/Contact">Contact</Link>
           </li>
           <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
-            <Link href="/HotelCards/Rooms">Room</Link>
+            <Link href="/Rooms">Room</Link>
           </li>
           {isLogin && (
             <li className="text-black hover:text-textColor transition duration-300 delay-200 border-b-2 border-transparent hover:border-textColor">
