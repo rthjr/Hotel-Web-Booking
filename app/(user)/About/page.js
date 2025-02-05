@@ -1,3 +1,4 @@
+import ScrollAnimation from '@components/motion/ScrollAnimation'
 import BannerAboutUs from '@components/user/Banners/BannerAboutUs'
 import AboutDetails from '@components/user/layout/AboutDetails'
 import Footer from '@components/user/layout/Footer'
@@ -6,14 +7,15 @@ import React from 'react'
 
 const page = () => {
     return (
-        <div className='w-full h-full flex flex-col gap-8'>
-            <div className='w-full flex flex-col justify-center items-center'>
-                <div className='w-full flex justify-center items-center shadow-2xl'>
+        <div className='w-full h-full flex flex-col'>
+            <div className='w-full h-full flex flex-col justify-center sticky bg-white top-0 z-50 items-center shadow-2xl'>
                     <div className='w-10/12'>
                         {/* Header */}
                         <Header />
                     </div>
+                    <ScrollAnimation/>
                 </div>
+            <div className='w-full flex flex-col justify-center items-center'>
 
                 <div className='w-full'>
                     <div className='w-full flex justify-center items-center'>

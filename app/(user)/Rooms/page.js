@@ -1,4 +1,5 @@
 
+import ScrollAnimation from '@components/motion/ScrollAnimation'
 import AllRooms from '@components/user/Card/AllRooms'
 import Footer from '@components/user/layout/Footer'
 import Header from '@components/user/layout/Header'
@@ -12,6 +13,7 @@ const page = () => {
                 <div className='w-9/12 h-full'>
                     <Header />
                 </div>
+                <ScrollAnimation/>
             </div>
 
             {/* body */}

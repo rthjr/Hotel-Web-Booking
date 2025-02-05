@@ -3,27 +3,36 @@
 import React, { useEffect, useState } from "react";
 import { LARAVEL_ENDPOINT } from "@utils/apiEndpoints";
 import { BtnRoomDetails } from "../layout/Button";
+import { motion } from "framer-motion";
+import AnimePopUp from "@components/motion/AnimePopUp";
 
 const AllRooms = () => {
   const [RoomData, setDataRooms] = useState([]);
   const count = String(RoomData.length);
-  const [dataCheck, setDataCheck] = useState(false);
 
   const fetchData = async () => {
     try {
       const res = await fetch(LARAVEL_ENDPOINT.ROOMS);
 
       if (!res.ok) {
-        setDataCheck(true);
         throw new Error("Failed to fetch rooms");
       }
 
       const data = await res.json();
       setDataRooms(data);
-      setDataCheck(false);
     } catch (error) {
       console.log("Error fetching rooms:", error.message);
     }
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.1,
+      transition: { duration: 0.3 },
+    },
+    tap: {
+      scale: 0.9,
+    },
   };
 
   useEffect(() => {
@@ -33,12 +42,16 @@ const AllRooms = () => {
   return (
     <div>
       <div className="max-w-6xl mx-auto">
-        {(count === "0" && dataCheck === true) ? (
-          <div className="grid grid-cols-2 gap-y-16 pt-8">
-            {RoomData.map((room) => (
-              <div
-                key={room.roomId}
-                className="flex flex-col md:flex-row justify-center items-center"
+        <div className="grid grid-cols-2 gap-y-16 pt-8">
+          {RoomData.map((room) => (
+            <div
+              key={room.roomId}
+              className="flex flex-col md:flex-row justify-center items-center"
+            >
+              <AnimePopUp
+                whileHover={buttonVariants.hover}
+                whileTap={buttonVariants.tap}
+                variants={buttonVariants}
               >
                 <div className="flex flex-col max-w-sm shadow-lg rounded-xl bg-white overflow-hidden">
                   <img
@@ -95,16 +108,10 @@ const AllRooms = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="w-full h-full  ">
-            <div className="w-full min-h-screen flex flex-col justify-center items-center ">
-              <span className="font-bold text-3xl text-textColor ">Data not Exist!!</span>
+              </AnimePopUp>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
       </div>
     </div>
   );
