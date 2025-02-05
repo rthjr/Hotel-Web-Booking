@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../layout/Button";
+import ButtonWrapper from "@components/motion/ButtonWrapper";
 
 const reservations = [
   {
@@ -62,7 +63,7 @@ const ReservationCard = ({ reservation }) => {
             Amenities: <span className="font-medium">{reservation.amenities}</span>
           </p>
         </div>
-        <Button param="Detail" />
+        <ButtonWrapper/>
       </div>
     </div>
   );
