@@ -2,6 +2,7 @@
 
 import { useRouter } from "@node_modules/next/navigation";
 import { useState } from "react";
+import Link from "@node_modules/next/link";
 
 import React from "react";
 
@@ -111,7 +112,7 @@ const SignUpForm = () => {
         </section>
 
         <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
-          <div className="max-w-xl lg:max-w-3xl">
+          <div className="max-w-xl lg:max-w-4xl">
             <div className="relative -mt-16 block lg:hidden">
               <a
                 className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
@@ -143,9 +144,9 @@ const SignUpForm = () => {
 
             <form
               onSubmit={handleSubmit}
-              className="mt-8 grid grid-cols-6 gap-6"
+              className="mt-8 grid grid-cols-6 gap-6  "
             >
-              <div className="col-span-6 sm:col-span-3">
+              <div className="col-span-6 sm:col-span-3 ">
                 <label
                   htmlFor="FirstName"
                   className="block text-sm font-medium text-gray-700"
@@ -236,37 +237,6 @@ const SignUpForm = () => {
                 )}
               </div>
 
-              <div className="col-span-6">
-                <label htmlFor="MarketingAccept" className="flex gap-4">
-                  <input
-                    type="checkbox"
-                    id="MarketingAccept"
-                    name="marketing_accept"
-                    className="size-5 rounded-md  p-4 border-2 border-textColor bg-white shadow-sm"
-                  />
-
-                  <span className="text-sm text-gray-700">
-                    I want to receive emails about events, product updates and
-                    company announcements.
-                  </span>
-                </label>
-              </div>
-
-              <div className="col-span-6">
-                <p className="text-sm text-gray-500">
-                  By creating an account, you agree to our
-                  <a href="#" className="text-gray-700 underline">
-                    {" "}
-                    terms and conditions{" "}
-                  </a>
-                  and
-                  <a href="#" className="text-gray-700 underline">
-                    privacy policy
-                  </a>
-                  .
-                </p>
-              </div>
-
               <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                 <button className="inline-block shrink-0 rounded-md border border-textColor bg-textColor px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-textColor focus:outline-none focus:ring active:text-blue-500">
                   Create an account
@@ -276,9 +246,7 @@ const SignUpForm = () => {
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Already have an account?
-                  <a href="#" className="text-gray-700 underline">
-                    Log in
-                  </a>
+                  <Link className="text-gray-700 underline" href="/login">Log In</Link>
                   .
                 </p>
               </div>
