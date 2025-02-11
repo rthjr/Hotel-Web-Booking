@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 
 // react icon
@@ -6,8 +8,16 @@ import { FaHotel } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { Button } from "./Button";
+import { useRouter } from "@node_modules/next/navigation";
 
 const MenuFilter = () => {
+  const router = useRouter();
+
+  const handleRouter = (e) => {
+    e.preventDefault();
+    router.push("/Rooms");
+  };
+
   return (
     <div className="flex flex-wrap gap-4 justify-between items-center p-4 bg-white rounded-lg shadow-2xl">
       <div className="flex gap-4 w-full sm:w-auto">
@@ -68,7 +78,7 @@ const MenuFilter = () => {
         </div>
       </div>
       <div className="w-full sm:w-auto">
-        <Button param="Book Now" style="rounded-lg" />
+        <Button param="Book Now" style="rounded-lg" Rooms={handleRouter} />
       </div>
     </div>
   );
