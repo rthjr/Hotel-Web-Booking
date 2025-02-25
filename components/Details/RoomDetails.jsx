@@ -2,6 +2,17 @@
 import React from "react";
 import { useRouter } from "@node_modules/next/navigation";
 import Link from "next/link";
+import { HiWifi } from "react-icons/hi";
+import { MdOutlineAirportShuttle } from "react-icons/md";
+import { MdFamilyRestroom } from "react-icons/md";
+import { TbSmokingNo } from "react-icons/tb";
+import { PiFlowerLotusBold } from "react-icons/pi";
+import { IoIosRestaurant } from "react-icons/io";
+import { LuSquareParking } from "react-icons/lu";
+import { MdOutlineRoomService } from "react-icons/md";
+import { MdOutlineCoffeeMaker } from "react-icons/md";
+import { MdOutlineFreeBreakfast } from "react-icons/md";
+import { IoBedOutline } from "react-icons/io5";
 
 const RoomDetails = () => {
   const router = useRouter();
@@ -192,9 +203,7 @@ const RoomDetails = () => {
               </div>
             </div>
           </div>
-          <div
-            className="w-3/12 h-full flex flex-col justify-center gap-4 pt-4"
-          >
+          <div className="w-3/12 h-full flex flex-col justify-center gap-4 pt-4">
             <div className="flex flex-col gap-6 border border-gray-350 rounded-lg p-6 shadow-lg bg-bgtextColor">
               <div className="flex justify-center items-center border-b border-gray-300 pb-4">
                 <h3 className="text-xl font-semibold text-gray-800">
@@ -219,19 +228,21 @@ const RoomDetails = () => {
             <div className="h-40 flex flex-col">
               <div className="flex justify-center items-center">
                 <div>
-                  {<iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62565.16404994723!2d104.90470142800619!3d11.456613727772911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109599384325cdd%3A0xe25c308bc6822c0a!2sKrong%20Ta%20Khmau!5e0!3m2!1sen!2skh!4v1738388659069!5m2!1sen!2skh"
-                    style={{ border: 0, width: "100%" }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>}
+                  {
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62565.16404994723!2d104.90470142800619!3d11.456613727772911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109599384325cdd%3A0xe25c308bc6822c0a!2sKrong%20Ta%20Khmau!5e0!3m2!1sen!2skh!4v1738388659069!5m2!1sen!2skh"
+                      style={{ border: 0, width: "100%" }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  }
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="w-12/12 flex justify-between">
+        <div className="w-12/12 flex justify-between border-b border-gray-300">
           <div className="w-8/12">
             <div className="flex flex-col gap-4 p-4">
               <div>
@@ -287,65 +298,85 @@ const RoomDetails = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-4 text-green-600">
                   {/* <!-- Facility 1 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">📶</span>
+                    <span className="text-2xl">
+                      <HiWifi />
+                    </span>
                     <span className="text-sm font-medium">Free WiFi</span>
                   </div>
                   {/* <!-- Facility 2 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🚌</span>
+                    <span className="text-2xl">
+                      <MdOutlineAirportShuttle />
+                    </span>
                     <span className="text-sm font-medium">Airport shuttle</span>
                   </div>
                   {/* <!-- Facility 3 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">👨‍👩‍👧</span>
+                    <span className="text-2xl">
+                      <MdFamilyRestroom />
+                    </span>
                     <span className="text-sm font-medium">Family rooms</span>
                   </div>
                   {/* <!-- Facility 4 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🚭</span>
+                    <span className="text-2xl">
+                      <TbSmokingNo />
+                    </span>
                     <span className="text-sm font-medium">
                       Non-smoking rooms
                     </span>
                   </div>
                   {/* <!-- Facility 5 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🪷</span>
+                    <span className="text-2xl">
+                      <PiFlowerLotusBold />
+                    </span>
                     <span className="text-sm font-medium">
                       Spa and wellness centre
                     </span>
                   </div>
                   {/* <!-- Facility 6 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🍴</span>
+                    <span className="text-2xl">
+                      <IoIosRestaurant />
+                    </span>
                     <span className="text-sm font-medium">2 restaurants</span>
                   </div>
                   {/* <!-- Facility 7 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🅿️</span>
+                    <span className="text-2xl">
+                      <LuSquareParking />
+                    </span>
                     <span className="text-sm font-medium">Free parking</span>
                   </div>
                   {/* <!-- Facility 8 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🛎️</span>
+                    <span className="text-2xl">
+                      <MdOutlineRoomService />
+                    </span>
                     <span className="text-sm font-medium">Room service</span>
                   </div>
                   {/* <!-- Facility 9 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">☕</span>
+                    <span className="text-2xl">
+                      <MdOutlineCoffeeMaker />
+                    </span>
                     <span className="text-sm font-medium">
                       Tea/coffee maker in all rooms
                     </span>
                   </div>
                   {/* <!-- Facility 10 --> */}
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🍳</span>
+                    <span className="text-2xl">
+                      <MdOutlineFreeBreakfast />
+                    </span>
                     <span className="text-sm font-medium">Breakfast</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className=" w-4/12 max-w-sm mx-auto p-4">
+          <div className=" w-4/12 max-w-sm mx-auto p-4 ">
             <div className=" max-w-sm mx-auto p-4 bg-bgtextColor rounded-lg shadow-lg">
               <h2 className="text-lg font-semibold mb-4">
                 Property highlights
@@ -370,6 +401,164 @@ const RoomDetails = () => {
               </button>
             </div>
           </div>
+        </div>
+        <div className=" mt-4 flex justify-between gap-4 py-4 border-2 rounded-xl p-4 bg-white">
+          <div className="flex flex-col justify-evenly">
+            <h2 className="text-2xl font-bold ">Sign in, save money</h2>
+            <p>To see if you can save 10% or more at this property, sign in</p>
+            <div className="flex items-center gap-6">
+              <button className="border border-bgDarkColor py-1 px-3 rounded-md text-textColor hover:bg-bgNavColor  transition-colors duration-300">
+                Sign in
+              </button>
+              <Link
+                href="#"
+                className="text-bgDarkColor hover:text-textColor hover:opacity-70  hover:underline underline-offset-2"
+              >
+                Create an accout
+              </Link>
+            </div>
+          </div>
+          <div>
+            <img
+              src="/image/savingGift.jpg"
+              alt="gift"
+              className="w-40 h-full object-cover"
+            />
+          </div>
+        </div>
+        <div className="mt-4 flex flex-col justify-center">
+          <h2 className="text-3xl font-bold py-4">Availability</h2>
+          <div className="flex gap-[2px] bg-amber-400 rounded-md p-[2px]">
+            <button type="" className="bg-white rounded-md py-1 pl-1 pr-16">
+              <input type="datetime-local" />
+              Check-in date - Check-out date
+            </button>
+            <button className="bg-white rounded-md py-1 pl-1 pr-16">
+              0 adult.0 children.1room
+            </button>
+            <button className="bg-white">Search</button>
+          </div>
+        </div>
+        <div className="mt-8 flex flex-col justify-center border-2 bg-white shadow-xl">
+          <table className="min-w-full text-sm text-gray-700">
+            <thead className="bg-bgDarkColor text-white border-b-2">
+              <tr>
+                <th className="px-6 py-3 text-left font-semibold text-white">
+                  Room type
+                </th>
+                <th className="px-6 py-3 text-left font-semibold text-white border-l-2 border-r-2">
+                  Number of guests
+                </th>
+                <th className="px-6 py-3 text-left font-semibold text-white">
+                  Today's price
+                </th>
+                <th className="px-6 py-3 text-left font-semibold text-white border-l-2 border-r-2">
+                  Your choices
+                </th>
+                <th className="px-6 py-3 text-left font-semibold text-white border-l-2">
+                  Header 5
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b-2 ">
+                <td className="px-6 py-3">
+                  <div>
+                    <button className="font-bold text-textColor hover:text-orange-700 underline underline-offset-2">Studio Twin</button>
+                    <p className="flex items-center gap-1">2 single beds<IoBedOutline /> </p>
+                     
+
+                  </div>
+
+                </td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 1, Cell 2
+                </td>
+                <td className="px-6 py-3">Row 1, Cell 3</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 1, Cell 4
+                </td>
+                <td className="px-6 py-3 border-l-2">Row 1, Cell 5</td>
+              </tr>
+              <tr className=" border-b-2">
+                <td className="px-6 py-3">Row 2, Cell 1</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 2, Cell 2
+                </td>
+                <td className="px-6 py-3">Row 2, Cell 3</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 2, Cell 4
+                </td>
+                <td className="px-6 py-3 border-l-2">Row 2, Cell 5</td>
+              </tr>
+              <tr className="duration-200 border-b-2">
+                <td className="px-6 py-3">Row 3, Cell 1</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 3, Cell 2
+                </td>
+                <td className="px-6 py-3">Row 3, Cell 3</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 3, Cell 4
+                </td>
+                <td className="px-6 py-3 border-l-2">Row 3, Cell 5</td>
+              </tr>
+              <tr className="border-b-2">
+                <td className="px-6 py-3">Row 4, Cell 1</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 4, Cell 2
+                </td>
+                <td className="px-6 py-3">Row 4, Cell 3</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 4, Cell 4
+                </td>
+                <td className="px-6 py-3 border-l-2">Row 4, Cell 5</td>
+              </tr>
+              <tr className="border-b-2">
+                <td className="px-6 py-3">Row 5, Cell 1</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 5, Cell 2
+                </td>
+                <td className="px-6 py-3">Row 5, Cell 3</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 5, Cell 4
+                </td>
+                <td className="px-6 py-3 border-l-2">Row 5, Cell 5</td>
+              </tr>
+              <tr className="border-b-2">
+                <td className="px-6 py-3">Row 6, Cell 1</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 6, Cell 2
+                </td>
+                <td className="px-6 py-3">Row 6, Cell 3</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 6, Cell 4
+                </td>
+                <td className="px-6 py-3 border-l-2">Row 6, Cell 5</td>
+              </tr>
+              <tr className="border-b-2">
+                <td className="px-6 py-3">Row 7, Cell 1</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 7, Cell 2
+                </td>
+                <td className="px-6 py-3">Row 7, Cell 3</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 7, Cell 4
+                </td>
+                <td className="px-6 py-3 border-l-2">Row 7, Cell 5</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-3">Row 8, Cell 1</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 8, Cell 2
+                </td>
+                <td className="px-6 py-3">Row 8, Cell 3</td>
+                <td className="px-6 py-3 border-l-2 border-r-2">
+                  Row 8, Cell 4
+                </td>
+                <td className="px-6 py-3 border-l-2">Row 8, Cell 5</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </>

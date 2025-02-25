@@ -11,3 +11,8 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+table, tbody, td {
+    width: 30%;
+    height: auto;
+}
