@@ -5,6 +5,7 @@ import Header from '@components/user/layout/Header'
 import Footer from '@components/user/layout/Footer'
 import BannerRoom from '@components/user/Banners/BannerRoom'
 import { useRouter } from "@node_modules/next/navigation";
+import ScrollAnimation from '@components/motion/ScrollAnimation'
 
 const page = () => {
     const router = useRouter();
@@ -12,11 +13,12 @@ const page = () => {
     return (
         <div className='w-full h-full flex flex-col gap-8'>
             <div className='w-full flex flex-col justify-center items-center'>
-                <div className='w-full flex justify-center items-center shadow-2xl'>
+                <div className='w-full flex flex-col justify-center items-center shadow-2xl'>
                     <div className='w-10/12'>
                         {/* Header */}
                         <Header />
                     </div>
+                    <ScrollAnimation/>
                 </div>
 
                 <div className='w-full'>

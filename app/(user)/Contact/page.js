@@ -1,3 +1,4 @@
+import ScrollAnimation from '@components/motion/ScrollAnimation'
 import BannerContact from '@components/user/Banners/BannerContact'
 import Footer from '@components/user/layout/Footer'
 import Header from '@components/user/layout/Header'
@@ -7,11 +8,12 @@ const page = () => {
     return (
         <div className='w-full h-full flex flex-col'>
             {/* Header */}
-            <div className='w-full flex justify-center items-center shadow-2xl sticky top-0 z-10 bg-white'>
+            <div className='w-full flex flex-col justify-center items-center shadow-2xl sticky top-0 z-10 bg-white'>
                 <div className='w-10/12'>
                     {/* Header */}
                     <Header />
                 </div>
+                <ScrollAnimation/>
             </div>
             <div className='flex flex-col gap-8'>
                 {/* banner */}

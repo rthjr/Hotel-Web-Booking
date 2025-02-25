@@ -1,31 +1,28 @@
 "use client";
-import React from "react";
-import { API_ENDPOINTS } from "@utils/apiEndpoints";
-import { useEffect } from "react";
-import { useState } from "react";
-// component
+import React, { useEffect, useState } from "react";
+import { LARAVEL_ENDPOINT } from "@utils/apiEndpoints";
 import { Button } from "../layout/Button";
 
-// react icon
+// React icons
 import { FaTv } from "react-icons/fa";
 import { PiShower } from "react-icons/pi";
 import { FaWifi } from "react-icons/fa6";
+
 const HotelCard = ({ Rooms }) => {
   const [hotels, setHotels] = useState([]);
 
   const fetchData = async () => {
     try {
-      const res = await fetch(API_ENDPOINTS.HOTELS);
+      const res = await fetch(LARAVEL_ENDPOINT.HOTELS);
 
       if (!res.ok) {
         throw new Error("Failed to fetch HOTELS!");
       }
 
       const data = await res.json();
-
       setHotels(data);
     } catch (error) {
-      console.log("Error fetching Room", error);
+      console.log("Error fetching hotels:", error);
     }
   };
 
@@ -37,16 +34,20 @@ const HotelCard = ({ Rooms }) => {
     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-textColor">
       {hotels.map((hotel) => (
         <div
-          key={hotel.id}
+          key={hotel.hotelId}
           className="flex flex-col gap-2 shadow-2xl rounded-xl"
         >
-          <img src={hotel.image} alt="Hotel" className="h-52 rounded-t-lg " />
+          <img
+            src={hotel.Image || "/image/default-hotel.jpg"}
+            alt="Hotel"
+            className="h-52 rounded-t-lg"
+          />
           <div className="flex flex-col gap-4 p-4">
             <div className="flex justify-between">
-              <h2>{hotel.name}</h2>
-              <p>Available: {hotel.available}</p>
+              <h2>{hotel.hotelName}</h2>
+              <p>Available Rooms: {hotel.amountRoom}</p>
             </div>
-            <p>Price: {hotel.price}</p>
+            <p>Location: {hotel.location}</p>
             <span className="flex items-center">
               <span className="h-px flex-1 bg-textColor"></span>
             </span>
@@ -62,7 +63,7 @@ const HotelCard = ({ Rooms }) => {
                   <FaWifi size={20} />
                 </div>
               </div>
-              <Button Rooms={Rooms} param="Expore" />
+              <Button Rooms={Rooms} param="Explore" />
             </div>
           </div>
         </div>

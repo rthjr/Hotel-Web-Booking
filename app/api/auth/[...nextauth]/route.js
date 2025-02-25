@@ -2,14 +2,20 @@ import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 
 export const authOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+
+    // Credentials Provider (Email & Password Login)
     CredentialsProvider({
       name: "credentials",
       credentials: {},
-
       async authorize(credentials) {
         const { email, password } = credentials;
 
@@ -35,38 +41,39 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    // Modify the session object to include additional user details
     async session({ session, token }) {
-      // Ensure that user-specific properties are added to the session object
       if (token) {
-        session.user.lastName = token.lastName || "Doe"; // Default to "Doe" if not provided
-        session.user.role = token.role || "user"; // Include role if present in the token
+        session.user.id = token.id;
+        session.user.lastName = token.lastName || "Doe";
+        session.user.role = token.role || "user";
       }
       return session;
     },
 
-    // Add custom fields to the JWT token during login
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
-        // Set fields during the login phase
-        token.lastName = user.lastName || "Doe"; // Default to "Doe"
-        token.role = user.role || "user"; // Default to "user"
+        token.id = user.id;
+        token.lastName = user.lastName || "Doe";
+        token.role = user.role || "user";
       }
+
+      // Store access token for Google logins
+      if (account?.provider === "google") {
+        token.accessToken = account.access_token;
+      }
+
       return token;
     },
 
-    // Redirect users after login or other actions
     async redirect({ url, baseUrl }) {
-      // Always redirect users to the base URL after authentication
       return baseUrl;
-    }
+    },
   },
 
-  // Set the session strategy to JSON Web Token (JWT)
   session: {
-    strategy: "jwt", // JWT-based session storage
-    maxAge: 30 * 24 * 60 * 60, // Set session expiration to 30 days
-    updateAge: 24 * 60 * 60, // Update the JWT every 24 hours
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
 
   secret: process.env.NEXTAUTH_SECRET,

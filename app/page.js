@@ -6,6 +6,8 @@ import Image from '@node_modules/next/image'
 import { FacilitiesHotel } from '@data/HotelData'
 import { RoomDetail } from '@data/HotelData'
 import Footer from '@components/user/layout/Footer'
+import ScrollAnimation from '@components/motion/ScrollAnimation'
+import TiltCard from '@components/motion/TiltCard'
 
 const Home = () => {
   return (
@@ -13,12 +15,13 @@ const Home = () => {
     // website
     <div className="flex flex-col gap-8 w-full h-full bg-gray-100">
       {/* Header */}
-      <div className='w-full flex justify-center items-center shadow-2xl sticky top-0 z-[9999] bg-white'>
-        
+      <div className='w-full flex flex-col justify-center items-center shadow-2xl sticky top-0 z-[9999] bg-white'>
+
         <div className='w-10/12'>
           {/* Header */}
           <Header />
         </div>
+        <ScrollAnimation />
       </div>
 
       <div className='w-full h-screen flex flex-col gap-8  pb-8'>
@@ -62,10 +65,7 @@ const Home = () => {
 
         <div className="w-10/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-textColor">
           {FacilitiesHotel.map((fh) => (
-            <div className="flex flex-col items-center justify-center gap-4 p-8 rounded-lg bg-white h-52 hover:bg-textColor hover:text-white transition-all w-full" key={fh.id}>
-              <span>{fh.icon}</span>
-              <span>{fh.facility}</span>
-            </div>
+            <TiltCard key={fh.id} icon={fh.icon} text={fh.facility} />
           ))}
         </div>
       </div>
