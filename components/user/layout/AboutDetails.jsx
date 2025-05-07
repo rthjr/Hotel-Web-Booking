@@ -1,31 +1,30 @@
-import Image from "@node_modules/next/image";
 import React from "react";
 
 const AboutDetails = () => {
   return (
     <>
-      <div className=" w-12/12 flex justify-between">
-        <div className="w-6/12 flex flex-col justify-center items-center gap-4">
-          <div className="relative w-6/12 h-auto">
+      <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 p-4 md:p-8">
+        {/* Image and CEO */}
+        <div className="w-full md:w-6/12 flex flex-col justify-center items-center gap-4">
+          <div className="relative w-full max-w-[150px] md:max-w-[180px] lg:max-w-[210px] h-auto">
             {/* Background Overlay */}
-            <div className="absolute top-0 left-0 w-full h-full translate-x-7 -translate-y-7 bg-bgDarkColor"></div>
-
+            <div className="absolute top-0 left-0 w-full h-full translate-x-5 -translate-y-5 bg-bgDarkColor rounded"></div>
             {/* Image Container */}
             <div className="relative w-full h-auto">
               <img
                 src="/image/manager.jpg"
                 alt="photo"
-                className="w-full h-auto  shadow-lg"
+                className="w-full h-auto shadow-lg rounded object-cover"
               />
             </div>
           </div>
-
           <div>
-            <h1>CEO</h1>
+            <h1 className="text-xl md:text-2xl font-semibold">CEO</h1>
           </div>
         </div>
-        <div className="w-6/12  flex flex-col justify-center items-center gap-4 p-6">
-          <p className="text-base">
+        {/* Text */}
+        <div className="w-full md:w-6/12 flex flex-col justify-center items-center gap-4 p-2 md:p-6">
+          <p className="text-base text-justify">
             The United Nations is an international organization founded in 1945.
             Currently made up of 193 Member States, the UN and its work are
             guided by the purposes and principles contained in its founding
@@ -64,8 +63,8 @@ const AboutDetails = () => {
           </p>
         </div>
       </div>
-      <div className="w-12/12 flex justify-center items-center">
-        <h1 className="text-4xl">Clients</h1>
+      <div className="w-full flex justify-center items-center mt-8">
+        <h1 className="text-2xl md:text-4xl font-bold">Clients</h1>
       </div>
     </>
   );

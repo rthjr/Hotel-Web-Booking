@@ -3,11 +3,11 @@ import React from 'react'
 import HotelCard from '@components/user/Card/HotelCard'
 import Header from '@components/user/layout/Header'
 import Footer from '@components/user/layout/Footer'
-import BannerRoom from '@components/user/Banners/BannerRoom'
 import { useRouter } from "@node_modules/next/navigation";
 import ScrollAnimation from '@components/motion/ScrollAnimation'
+import BannerHotel from '@components/user/Banners/BannerHotel'
 
-const page = () => {
+const Page = () => {
     const router = useRouter();
     const handleRoom = () => { router.push("/HotelCards/Rooms") }
     return (
@@ -20,14 +20,10 @@ const page = () => {
                     </div>
                     <ScrollAnimation/>
                 </div>
-
                 <div className='w-full'>
-                    <div className='w-full flex justify-center items-center'>
-                        <div className='w-full'>
-                            {/* Banner */}
-                            <BannerRoom />
-                        </div>
-                    </div>
+                    <section className="w-full flex justify-center items-center">
+                        <BannerHotel />
+                    </section>
                 </div>
             </div>
 
@@ -47,4 +43,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

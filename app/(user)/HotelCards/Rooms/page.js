@@ -4,7 +4,7 @@ import { useRouter } from "@node_modules/next/navigation";
 import Footer from "@components/user/layout/Footer";
 import Header from "@components/user/layout/Header";
 import Rooms from "@components/user/Card/Rooms";
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const handleBack = () => {
     router.back();
@@ -40,4 +40,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

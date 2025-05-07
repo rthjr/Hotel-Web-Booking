@@ -62,7 +62,7 @@ export const BtnRoomDetails = () => {
   const router = useRouter();
   return (
     <div>
-      <button className="w-full py-2 text-white bg-bgDarkColor rounded-md hover:bg-[#6F6238] focus:outline-none focus:ring-2 focus:ring-[#857749]"
+      <button className="w-full py-2 px-4 text-white bg-bgDarkColor rounded-md hover:bg-[#6F6238] focus:outline-none focus:ring-2 focus:ring-[#857749]"
       onClick={() => router.push("/HotelCards/Rooms/RoomDetails")}
       >
         Book Now

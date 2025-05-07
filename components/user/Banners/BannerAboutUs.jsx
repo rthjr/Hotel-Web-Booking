@@ -1,3 +1,5 @@
+"use client"
+import { HiArrowNarrowDown } from "@node_modules/react-icons/hi";
 import React from "react";
 
 const BannerAboutUs = () => {
@@ -5,7 +7,7 @@ const BannerAboutUs = () => {
     <div className=" w-full h-screen">
       <div>
         <div
-          className=" h-[100vh]"
+          className=" absolute inset-0 w-full h-[100vh]"
           style={{
             backgroundImage:
               "url('https://wallpapers.com/images/hd/fancy-hotel-room-nemacolin-resort-5z2qflmeuynjm0ln.jpg')",
@@ -13,20 +15,34 @@ const BannerAboutUs = () => {
             backgroundPosition: "center",
           }}
         >
-          <div className="w-full h-screen bg-bgDarkColor bg-opacity-50 flex justify-center items-center">
-          <div className="flex flex-col justify-center items-center text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_60%)] ">
-            <div className="w-5/12 grid place-items-center">
-            <h1 className="text-5xl font-bold">About Us</h1>
-            <p className="mt-10">
-              The elegant luxury bedrooms in this gallery showcase custom
-              interior designs & decorating ideas. View pictures and find your
-              perfect luxury bedroom design.
-            </p>
+          <div className=" h-full absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/60" />
+          <div className="relative z-10 w-full h-full flex items-center justify-center">
+            <div className="w-11/12 md:w-5/12 text-center flex flex-col justify-center items-center gap-6 animate-fade-in">
+              <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg">
+                About Us
+              </h1>
+              <p className="text-white/90 text-base md:text-lg drop-shadow">
+                The elegant luxury bedrooms in this gallery showcase custom
+                interior designs & decorating ideas. View pictures and find your
+                perfect luxury bedroom design.
+              </p>
+              <button className="mt-4 flex items-center gap-2 border-2 border-white text-white px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 shadow-lg">
+                <span className="font-semibold">Scroll Down</span>
+                <HiArrowNarrowDown className="animate-bounce" size={24} />
+              </button>
             </div>
           </div>
         </div>
-        </div>
       </div>
+      <style jsx>{`
+        .animate-fade-in {
+          animation: fadeIn 1.2s ease;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(40px);}
+          to { opacity: 1; transform: translateY(0);}
+        }
+      `}</style>
     </div>
   );
 };

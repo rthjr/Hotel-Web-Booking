@@ -3,7 +3,7 @@ import Header from '@components/user/layout/Header';
 import Footer from '@components/user/layout/Footer';
 import React from 'react'
 
-const page = () => {
+const Page = () => {
   return (
     <div className="w-full flex flex-col justify-between gap-8 min-h-screen">
       <div className="w-full flex flex-col justify-center items-center">
@@ -22,7 +22,7 @@ const page = () => {
       </div>
 
       <div className="w-full flex justify-center items-center">
-        <div className="w-11/12">
+        <div className="w-9/12">
            <div>
               <RoomDetails/>
            </div>
@@ -38,4 +38,4 @@ const page = () => {
   );
 };
 
-export default page
+export default Page

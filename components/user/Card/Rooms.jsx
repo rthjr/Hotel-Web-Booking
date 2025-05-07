@@ -3,6 +3,9 @@ import React from "react";
 import { useRouter } from "@node_modules/next/navigation";
 import { BtnRoomDetails } from "../layout/Button";
 import { RoomData } from "@/data/RoomData";
+import { FaKitchenSet } from "react-icons/fa6";
+import { FaWifi } from "react-icons/fa6";
+import { FaParking } from "react-icons/fa";
 
 const Rooms = () => {
   const router = useRouter();
@@ -30,71 +33,61 @@ const Rooms = () => {
           Back
         </button>
       </div>
-      <div className="max-w-6xl mx-auto">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 gap-y-16 pt-8">
-          {RoomData.map((Room) => (
-            <div
-              key={Room.id}
-              className="flex flex-col md:flex-row justify-center items-center  "
-            >
-              <div className="flex flex-col max-w-sm shadow-lg rounded-xl bg-white overflow-hidden">
-                <img
-                  src="/image/HotelImage5.jpg"
-                  alt="Hotel"
-                  className="h-60 w-full object-cover"
-                />
-                <div className="flex flex-col gap-4 p-6">
-                  <div className="flex justify-between items-center">
-                    <h2 className="text-lg font-semibold ">
-                      <span className="text-textColor">Room: </span>
-                      {Room.room}
-                    </h2>
-                    <p className="text-sm ">
-                      <span className="text-textColor">Available: </span>
-                      <span className="font-bold">{Room.available}</span>
-                    </p>
-                  </div>
-                  <div className="flex flex-col justify-between items-start gap-4 font-bold">
-                    <p className="text">
-                      <span className=" text-textColor">Room Type: </span>
-                      {Room.amountRoomType}&nbsp;{Room.roomType}
-                    </p>
-                    <p>
-                      <span className=" text-textColor">
-                        Number of Guests:{" "}
-                      </span>
-                      {Room.NumGuest}
-                    </p>
-                    <p className="text-xl font-bold ">
-                      <span className="text-textColor">Price: </span>
-                      {Room.price}
-                    </p>
-                  </div>
-                  <hr className="border-t border-gray-300" />
+      <div className="max-w-6xl mx-auto flex flex-col gap-8 pt-8">
+        {RoomData.map((Room) => (
+          <div
+            key={Room.id}
+            className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200
+              transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-bgDarkColor"
+            style={{ willChange: "transform, box-shadow" }}
+          >
+            {/* Image */}
+            <div className="w-60 h-[258px] ">
+              <img
+                src={Room.image || "/image/HotelImage5.jpg"}
+                alt="Room"
+                className="w-full h-full object-cover"
+                style={{ minHeight: '100%', minWidth: '100%' }}
+              />
+            </div>
+            {/* Details */}
+            <div className="flex flex-col justify-between p-4 pl-6 flex-1">
+              <div>
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                  <h2 className="text-2xl font-bold text-textColor">
+                    Room: {Room.room}
+                  </h2>
+                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${Room.available === "Yes" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+                    {Room.available === "Yes" ? "Available" : "Unavailable"}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-4 mt-2 text-gray-600 text-sm">
+                  <span className="text-textColor"><b className="text-textColor">Type:</b> {Room.amountRoomType} {Room.roomType}</span>
+                  <span className="text-textColor"><b className="text-textColor">Guests:</b> {Room.NumGuest}</span>
+                  <span className="text-textColor"><b className="text-textColor">Location:</b> City Center</span>
+                </div>
+                <div className="flex items-center gap-4 mt-4">
+                  <span title="Kitchen" className="bg-gray-100 p-2 rounded-full text-xl text-textColor "><FaKitchenSet /></span>
+                  <span title="Wifi" className="bg-gray-100 p-2 rounded-full text-xl text-textColor "><FaWifi /></span>
+                  <span title="Parking" className="bg-gray-100 p-2 rounded-full text-xl text-textColor "><FaParking /></span>
+                </div>
+                <p className="mt-4 text-gray-500 text-sm">
+                  {Room.description || "This spacious room offers everything you need for a comfortable stay."}
+                </p>
+              </div>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-6 gap-4">
+                <div>
+                  <span className="text-2xl font-bold text-yellow-600">${Room.price}</span>
+                  <span className="text-gray-500 text-sm ml-1">/night</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-yellow-500 font-semibold">★ 4.5/5</span>
                   <BtnRoomDetails />
-                  <div className="text-sm text-textColor">
-                    <p className="mt-2">
-                      Rating: <span className="font-medium">4.5/5</span>
-                    </p>
-                    <p>
-                      Location: <span className="font-medium">City Center</span>
-                    </p>
-                    <p>
-                      Amenities:{" "}
-                      <span className="font-medium">
-                        Kitchen, Wifi, Free Parking
-                      </span>
-                    </p>
-                    <p className="mt-2">
-                      Description: This spacious room offers everything you need
-                      for a comfortable stay.
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </>
   );
