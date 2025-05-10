@@ -1,37 +1,92 @@
 "use client"
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from '@node_modules/next/navigation';
+import { login, logout, checkAuth } from '@/lib/auth';
 
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    const { data: session, status } = useSession();
     const router = useRouter();
-
     const [isLogin, setIsLogin] = useState(false);
     const [userName, setUserName] = useState("");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (status === "authenticated") {
-            setIsLogin(true);
-            if (session?.user) {
-                setUserName(session.user.lastName || "");
+        checkAuthentication();
+    }, []);
+
+    const handleLogin = async (email, password) => {
+    try {
+        const response = await login(email, password);
+
+        if (!response.success) {
+            throw new Error(response.error);
+        }
+
+        // Store the token immediately after login
+        localStorage.setItem("token", response.user.token);
+
+        setIsLogin(true);
+        setUserName(response.user.lastName || "");
+        
+        router.push('/'); // Navigate after successful login
+        
+        return { success: true };
+    } catch (error) {
+        console.error('Login failed:', error);
+        return { success: false, error: error.message };
+    }
+};
+     const checkAuthentication = async () => {
+        try {
+            const response = await checkAuth();
+            if (response.authenticated) {
+                setIsLogin(true);
+                setUserName(response.user.lastName || "");
+            } else {
+                setIsLogin(false);
+                setUserName("");
             }
-        } else if (status === "unauthenticated") {
+        } catch (error) {
+            console.error('Auth check failed:', error);
             setIsLogin(false);
             setUserName("");
+        } finally {
+            setLoading(false);
         }
-    }, [status, session]);
+    };
+    /*
+    const handleLogin = async (email, password) => {
+        try {
+            const response = await login(email, password);
+            setIsLogin(true);
+            setUserName(response.user.lastName || "");
+            router.push('/');
+            return { success: true };
+        } catch (error) {
+            console.error('Login failed:', error);
+            return { success: false, error: error.message };
+        }
+    }; */
 
     const handleLogout = async () => {
-        await signOut({ redirect: false });
-        router.push("/");
+        try {
+            await logout();
+            setIsLogin(false);
+            setUserName("");
+            router.push("/");
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <AuthContext.Provider value={{
@@ -39,7 +94,8 @@ export const AuthProvider = ({ children }) => {
             userName,
             isDropdownOpen,
             setIsDropdownOpen,
-            handleLogout
+            handleLogout,
+            handleLogin
         }}>
             {children}
         </AuthContext.Provider>
