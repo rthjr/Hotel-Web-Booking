@@ -9,7 +9,7 @@ export const RoomData = [
     price : "$120",
     image : "/image/HotelImage11.webp"
 },
-{
+{   
     id : 2,
     room : "2",
     roomType : "large double beds",

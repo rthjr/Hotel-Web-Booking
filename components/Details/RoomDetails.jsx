@@ -11,7 +11,6 @@ import { LuSquareParking } from "react-icons/lu";
 import { MdOutlineRoomService } from "react-icons/md";
 import { MdOutlineCoffeeMaker } from "react-icons/md";
 import { MdOutlineFreeBreakfast } from "react-icons/md";
-import { IoBedOutline } from "react-icons/io5";
 import React, { useState } from "react";
 import DateRangePicker from "../components/DateRangePicker";
 import GuestRoomSelector from "../components/GuestRoomSelector";
@@ -52,32 +51,32 @@ const RoomDetails = () => {
           <div className="flex justify-center items-center py-4">
             <ul className="flex w-full justify-evenly ">
               <li className="flex-1 text-center py-4 text-gray-900 border-b-2 hover:border-b-2 hover:border-textColor hover:bg-bgNavColor  transition-colors duration-300">
-                <Link href="#">
+                <Link href="#overview">
                   <span className="">Overview</span>
                 </Link>
               </li>
               <li className="flex-1 text-center py-4 text-gray-900 border-b-2 hover:border-b-2 hover:border-textColor hover:bg-bgNavColor  transition-colors duration-300">
-                <Link href="#">
+                <Link href="#info-prices">
                   <span>Info & prices</span>
                 </Link>
               </li>
               <li className="flex-1 text-center py-4 text-gray-900 border-b-2 hover:border-b-2 hover:border-textColor hover:bg-bgNavColor  transition-colors duration-300">
-                <Link href="#">
+                <Link href="#facilities">
                   <span>Facilities</span>
                 </Link>
               </li>
               <li className="flex-1 text-center py-4 text-gray-900 border-b-2 hover:border-b-2 hover:border-textColor hover:bg-bgNavColor  transition-colors duration-300">
-                <Link href="#">
+                <Link href="#house-rules">
                   <span>House rules</span>
                 </Link>
               </li>
               <li className="flex-1 text-center py-4 text-gray-900 border-b-2 hover:border-b-2 hover:border-textColor hover:bg-bgNavColor  transition-colors duration-300">
-                <Link href="#">
+                <Link href="#fine-print">
                   <span>The fine print</span>
                 </Link>
               </li>
               <li className="flex-1 text-center py-4 text-gray-900 border-b-2 hover:border-b-2 hover:border-textColor hover:bg-bgNavColor  transition-colors duration-300">
-                <Link href="#">
+                <Link href="#guest-reviews">
                   <span>Guest reviews</span>
                 </Link>
               </li>
@@ -86,7 +85,7 @@ const RoomDetails = () => {
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col gap-4 py-4">
-            <div className="font-bold text-2xl">
+            <div id="#overview" className="font-bold text-2xl">
               <h2>Hotel 1</h2>
             </div>
             <div className="text-xl">
@@ -109,7 +108,9 @@ const RoomDetails = () => {
           <div>
             <div className="flex flex-col gap-6 py-4">
               <div>
-                <button className=" bg-bgDarkColor hover:bg-buttonColor text-bgColor py-2 px-5 rounded-lg">
+                <button
+                 onClick={() => router.push("/HotelCards/Rooms/RoomDetails/PaymentProcess")}
+                 className=" bg-bgDarkColor hover:bg-buttonColor text-bgColor py-2 px-5 rounded-lg">
                   Reservation
                 </button>
               </div>
@@ -435,7 +436,7 @@ const RoomDetails = () => {
             />
           </div>
         </div>
-        <div className="mt-4 flex flex-col justify-center">
+        <div id="#info-prices" className="mt-4 flex flex-col justify-center">
           <h2 className="text-3xl font-bold py-4">Availability</h2>
           <div className="flex max-w-[857px] gap-2 bg-amber-400  rounded-lg p-1 items-center">
             <DateRangePicker
@@ -1082,7 +1083,7 @@ const RoomDetails = () => {
           {/* Facilities Section */}
           <div className="mt-8 border-b">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-              <div>
+              <div id="facilities">
                 <h2 className="text-2xl font-bold mb-1">
                   Facilities of M9 Kirirorm Hotel
                 </h2>
@@ -1384,7 +1385,7 @@ const RoomDetails = () => {
           </div>
         </div>
         {/* House Rules Section */}
-        <div className="bg-white mt-8 p-6 border">
+        <div id="house-rules" className="bg-white mt-8 p-6 border">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
             <div>
               <h2 className="text-2xl font-bold mb-1">House rules</h2>

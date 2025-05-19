@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+/* import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "@node_modules/next/link";
@@ -21,7 +21,7 @@ const LoginForm = () => {
     try {
       const result = await authService.login({ email, password });
       
-      if (result.success) {      git branch
+      if (result.success) {
         
         router.push('/'); // Redirect to home page after successful login
       } else {
@@ -177,6 +177,150 @@ const LoginForm = () => {
         </div>
       </div>
     </div>
+  );
+}; */
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@components/ui/seperator";
+import { TriangleAlert } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { authService } from "@/lib/authService";
+import Link from "@node_modules/next/link";
+const LoginForm = () => {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setPending(true);
+    setError("");
+
+    try {
+      const result = await authService.login({ email, password });
+
+      if (result.success) {
+        router.push("/");
+      } else {
+        setError(result.error || "Invalid credentials");
+      }
+    } catch (err) {
+      console.error(err);
+      setError(err.message || "An error occurred during login");
+    } finally {
+      setPending(false);
+    }
+  };
+
+
+  const handleProviderSignIn = (provider) => {
+    // Placeholder for social login logic
+    setPending(true);
+    console.log(`Logging in with ${provider}`);
+    setTimeout(() => {
+      setPending(false);
+      // Simulate success
+      router.push("/");
+    }, 1000);
+  };
+
+  return (
+    <Card className="w-full max-w-[400px] mx-auto p-8">
+      <CardHeader className="pt-0 px-0">
+        <CardTitle className="text-textColor mb-3 text-2xl">
+          Login to continue
+        </CardTitle>
+        <CardDescription className="text-textColor">
+          Use your email or a provider to log in
+        </CardDescription>
+      </CardHeader>
+
+      {error && (
+        <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6">
+          <TriangleAlert className="size-4" />
+          <p>{error}</p>
+        </div>
+      )}
+
+      <CardContent className="space-y-6 px-0 pb-0">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            type="email"
+            disabled={pending}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+          />
+          <Input
+            type="password"
+            disabled={pending}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <Button
+            type="submit"
+            className="w-full hover:scale-105 transition-all duration-300"
+            size="lg"
+            disabled={pending}
+            variant="default"
+          >
+            {pending ? "Signing in..." : "Continue"}
+          </Button>
+        </form>
+
+        <Separator />
+
+        <div className="flex flex-col gap-y-4">
+          <Button
+            disabled={pending}
+            onClick={() => handleProviderSignIn("google")}
+            variant="outline"
+            size="lg"
+            className="w-full relative hover:scale-105 transition-all duration-300"
+          >
+            <FcGoogle className="size-5 absolute top-2.5 left-2.5" />
+            Continue with Google
+          </Button>
+          <Button
+            disabled={pending}
+            onClick={() => handleProviderSignIn("github")}
+            variant="outline"
+            size="lg"
+            className="w-full relative hover:scale-105 transition-all duration-300"
+          >
+            <FaGithub className="size-5 absolute top-2.5 left-2.5" />
+            Continue with GitHub
+          </Button>
+        </div>
+
+        <p className="text-xs text-gray-700 mt-4">
+          Don’t have an account?{" "}
+          <Link
+            href="/signup"
+            className="text-sky-700 cursor-pointer hover:underline"
+          >
+            Sign up
+          </Link>
+        </p>
+      </CardContent>
+    </Card>
   );
 };
 

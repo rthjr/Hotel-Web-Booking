@@ -1,9 +1,9 @@
-import { connectMongoDB } from "@/lib/mongodb";
-import User from "@/models/user";
-import NextAuth from "next-auth/next";
+//import { connectMongoDB } from "@/lib/mongodb";
+//import User from "@/models/user";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import bcrypt from "bcryptjs";
+import { jwtDecode } from "jwt-decode";
 
 export const authOptions = {
   providers: [
@@ -19,24 +19,30 @@ export const authOptions = {
       async authorize(credentials) {
         const { email, password } = credentials;
 
-        try {
-          await connectMongoDB();
-          const user = await User.findOne({ email });
-
-          if (!user) {
-            return null;
+        // Authenticate with Laravel backend
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_LARAVEL_API_URL}/api/login`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
           }
+        );
 
-          const passwordsMatch = await bcrypt.compare(password, user.password);
+        const data = await res.json();
 
-          if (!passwordsMatch) {
-            return null;
-          }
+        if (res.ok && data.access_token) {
+          // Decode JWT to get role
+          const decoded = jwtDecode(data.access_token);
 
-          return user;
-        } catch (error) {
-          console.log("Error: ", error);
+          return {
+            ...data.user, // user info from Laravel
+            accessToken: data.access_token,
+            role: decoded.role, // role from JWT
+          };
         }
+
+        return null;
       },
     }),
   ],
@@ -44,8 +50,10 @@ export const authOptions = {
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id;
-        session.user.lastName = token.lastName || "Doe";
-        session.user.role = token.role || "user";
+        session.user.email = token.email;
+        session.user.name = token.name;
+        session.user.role = token.role;
+        session.user.accessToken = token.accessToken;
       }
       return session;
     },
@@ -53,15 +61,15 @@ export const authOptions = {
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
-        token.lastName = user.lastName || "Doe";
-        token.role = user.role || "user";
+        token.email = user.email;
+        token.name = user.name;
+        token.role = user.role;
+        token.accessToken = user.accessToken;
       }
-
       // Store access token for Google logins
       if (account?.provider === "google") {
         token.accessToken = account.access_token;
       }
-
       return token;
     },
 

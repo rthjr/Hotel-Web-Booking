@@ -12,23 +12,20 @@
     box-sizing: border-box;
 }
 
-table, tbody, td {
-    width: 30%;
-    height: auto;
+html {
+  scroll-behavior: smooth;
 }
-
-
 
 @layer base {
   :root {
         --background: 0 0% 100%;
         --foreground: 0 0% 3.9%;
-        --card: 0 0% 100%;
+        --card: 90 0.03% 107%;
         --card-foreground: 0 0% 3.9%;
         --popover: 0 0% 100%;
         --popover-foreground: 0 0% 3.9%;
-        --primary: 0 0% 9%;
-        --primary-foreground: 0 0% 98%;
+        --primary: 40 28% 38%;
+        --primary-foreground: 60 25% 95%;
         --secondary: 0 0% 96.1%;
         --secondary-foreground: 0 0% 9%;
         --muted: 0 0% 96.1%;

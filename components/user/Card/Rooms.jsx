@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import { LARAVEL_ENDPOINT } from "@utils/apiEndpoints";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "@node_modules/next/navigation";
 import { BtnRoomDetails } from "../layout/Button";
 import { RoomData } from "@/data/RoomData";
@@ -8,10 +9,26 @@ import { FaWifi } from "react-icons/fa6";
 import { FaParking } from "react-icons/fa";
 
 const Rooms = () => {
+  const [rooms, setRooms] = useState([]);
   const router = useRouter();
   const handleBack = () => {
     router.back();
   };
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const res = await fetch(LARAVEL_ENDPOINT.ROOMS);
+        if (!res.ok) throw new Error("Failed to fetch rooms");
+        const data = await res.json();
+        setRooms(data);
+      } catch (error) {
+        console.error("Error fetching rooms:", error);
+      }
+    };
+    fetchRooms();
+  }, []);
+
   return (
     <>
       <div>
@@ -34,9 +51,9 @@ const Rooms = () => {
         </button>
       </div>
       <div className="max-w-6xl mx-auto flex flex-col gap-8 pt-8">
-        {RoomData.map((Room) => (
+        {rooms.map((Room) => (
           <div
-            key={Room.id}
+            key={Room.roomId}
             className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200
               transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-bgDarkColor"
             style={{ willChange: "transform, box-shadow" }}
@@ -55,15 +72,19 @@ const Rooms = () => {
               <div>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                   <h2 className="text-2xl font-bold text-textColor">
-                    Room: {Room.room}
+                    Room: {Room.roomType}
                   </h2>
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${Room.available === "Yes" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
-                    {Room.available === "Yes" ? "Available" : "Unavailable"}
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                      Room.available ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {Room.available ? "Available" : "Unavailable"}
                   </span>
-                </div>
+                </div>  
                 <div className="flex flex-wrap gap-4 mt-2 text-gray-600 text-sm">
-                  <span className="text-textColor"><b className="text-textColor">Type:</b> {Room.amountRoomType} {Room.roomType}</span>
-                  <span className="text-textColor"><b className="text-textColor">Guests:</b> {Room.NumGuest}</span>
+                  <span className="text-textColor"><b className="text-textColor">Type:</b> {Room.bedType}</span>
+                  <span className="text-textColor"><b className="text-textColor">Guests:</b> {Room.maxOccupancy}</span>
                   <span className="text-textColor"><b className="text-textColor">Location:</b> City Center</span>
                 </div>
                 <div className="flex items-center gap-4 mt-4">
@@ -72,12 +93,12 @@ const Rooms = () => {
                   <span title="Parking" className="bg-gray-100 p-2 rounded-full text-xl text-textColor "><FaParking /></span>
                 </div>
                 <p className="mt-4 text-gray-500 text-sm">
-                  {Room.description || "This spacious room offers everything you need for a comfortable stay."}
+                  {Room.amenities/* description */ || "This spacious room offers everything you need for a comfortable stay."}
                 </p>
               </div>
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-6 gap-4">
                 <div>
-                  <span className="text-2xl font-bold text-yellow-600">${Room.price}</span>
+                  <span className="text-2xl font-bold text-yellow-600">${Room.pricePerNight}</span>
                   <span className="text-gray-500 text-sm ml-1">/night</span>
                 </div>
                 <div className="flex items-center gap-2">

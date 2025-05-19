@@ -11,10 +11,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body >
+            <body>
                 <ContentProvider>
                     <HotelProvider>
-                        <OwnerAuthProvider>{children}</OwnerAuthProvider>
+                        <OwnerAuthProvider>
+                            {children}
+                        </OwnerAuthProvider>
                     </HotelProvider>
                 </ContentProvider>
             </body>

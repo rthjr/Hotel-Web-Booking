@@ -1,8 +1,7 @@
 "use client";
 
-import { SessionProvider } from "next-auth/react";
-import React, { useState, useEffect } from "react";
-import { useSession } from 'next-auth/react';
+import { SessionProvider, useSession } from "next-auth/react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export const AuthPv = ({ children }) => {
@@ -31,5 +30,5 @@ export const OwnerAuthProvider = ({ children }) => {
         );
     }
 
-    return <SessionProvider>{children}</SessionProvider>;
+    return <>{children}</>;
 };

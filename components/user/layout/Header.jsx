@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button, LoginButton } from "./Button";
+import { LoginButton } from "./Button";
 import Image from "next/image";
 import { RxAvatar } from "react-icons/rx";
 import { FiMenu, FiLogOut } from "react-icons/fi";
@@ -50,7 +50,7 @@ const Header = () => {
 
   return (
     <div className="sticky top-0 bg-white">
-      <div className="flex justify-between items-center py-2">
+      <div className="flex justify-between items-center py-1">
         <Link href="/">
           <Image src="/logo/logo.png" alt="logo" width={100} height={100} />
         </Link>
