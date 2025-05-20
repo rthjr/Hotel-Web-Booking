@@ -180,7 +180,7 @@ const LoginForm = () => {
   );
 }; */
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -197,8 +197,11 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { authService } from "@/lib/authService";
 import Link from "@node_modules/next/link";
+import { useAuth } from "@/Context/AuthContext/AuthContext";
+
 const LoginForm = () => {
   const router = useRouter();
+  const { handleLogin } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -211,7 +214,7 @@ const LoginForm = () => {
     setError("");
 
     try {
-      const result = await authService.login({ email, password });
+      const result = await handleLogin(email, password);
 
       if (result.success) {
         router.push("/");
@@ -311,7 +314,7 @@ const LoginForm = () => {
         </div>
 
         <p className="text-xs text-gray-700 mt-4">
-          Don’t have an account?{" "}
+          Don't have an account?{" "}
           <Link
             href="/signup"
             className="text-sky-700 cursor-pointer hover:underline"

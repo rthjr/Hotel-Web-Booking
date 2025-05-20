@@ -24,15 +24,15 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogin = async (email, password) => {
     try {
-      const response = await authService.login(email, password);
+      const response = await authService.login({ email, password });
 
       if (!response.success) {
         throw new Error(response.error);
       }
 
-      localStorage.setItem("token", response.user.token);
+      localStorage.setItem("token", response.data.access_token);
       setIsLogin(true);
-      setUserName(response.user.lastName || "");
+      setUserName(response.data.user.lastName || response.data.user.name || "");
       router.push("/");
 
       return { success: true };
