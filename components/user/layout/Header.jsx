@@ -112,7 +112,7 @@ const Header = () => {
                     className="flex items-center gap-2 px-4 py-2 cursor-pointer"
                     onClick={handleLogout}
                   >
-                    <FiLogOut size={20} />
+                    <FiLogOut size={20} className="z-50"/>
                     Log out
                   </li>
                 </ul>

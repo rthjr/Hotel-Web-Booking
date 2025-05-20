@@ -18,9 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState([]);
 
-  useEffect(() => {
-    checkAuthentication();
-  }, []);
+  const refresh = localStorage.getItem("refresh_token") ? true : false;
 
   const handleLogin = async (email, password) => {
     try {
@@ -50,6 +48,7 @@ export const AuthProvider = ({ children }) => {
         setUserName(response.user.lastName || "");
 
         const data = await authService.user();
+
         setUserData(data);
       } else {
         setIsLogin(false);
@@ -82,11 +81,40 @@ export const AuthProvider = ({ children }) => {
       await logout();
       setIsLogin(false);
       setUserName("");
+      // Clear all auth data from localStorage
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       router.push("/");
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
+
+useEffect(() => {
+  if (refresh) {
+    const refreshToken = async () => {
+      try {
+        const response = await authService.refresh();
+        if (response.success) {
+          localStorage.setItem("token", response.data.access_token);
+          localStorage.setItem("refresh_token", response.data.refresh_token);
+        } else {
+          console.error("Failed to refresh token:", response.error);
+        }
+      } catch (error) {
+        console.error("Error refreshing token:", error);
+      }
+    };
+
+    refreshToken();
+  }
+}, [refresh]);
+
+  useEffect(() => {
+    checkAuthentication();
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
