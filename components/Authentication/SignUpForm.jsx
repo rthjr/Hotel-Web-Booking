@@ -3,8 +3,21 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "@node_modules/next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@components/ui/seperator";
+import { TriangleAlert, Mail, Lock, User } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { authService } from "@/lib/authService";
+import Link from "@node_modules/next/link";
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -41,7 +54,7 @@ const SignUpForm = () => {
       const result = await authService.register(formData);
       
       if (result.success) {
-        router.push('/login'); // Redirect to login page after successful registration
+        router.push('/login');
       } else {
         setError(result.error || "Registration failed");
       }
@@ -53,128 +66,177 @@ const SignUpForm = () => {
     }
   };
 
+  const handleProviderSignIn = (provider) => {
+    setIsLoading(true);
+    console.log(`Signing up with ${provider}`);
+    setTimeout(() => {
+      setIsLoading(false);
+      router.push("/");
+    }, 1000);
+  };
+
   return (
-    <div>
-      <div className="font-[sans-serif] max-sm:px-4">
-        <div className="min-h-screen flex flex-col items-center justify-center">
-          <div className="grid md:grid-cols-2 items-center gap-4 max-md:gap-8 max-w-6xl max-md:max-w-lg w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
-            <div className="md:max-w-md w-full px-4 py-4">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-12">
-                  <h3 className="text-gray-800 text-3xl font-extrabold">
-                    Sign up
-                  </h3>
-                  <p className="text-sm mt-4 text-gray-800">
-                    Already have an account{" "}
-                    <Link
-                      href="/login"
-                      className="text-textColor font-semibold hover:underline ml-1 whitespace-nowrap"
-                    >
-                      Sign in here
-                    </Link>
-                  </p>
-                </div>
+    <div className="">
+      <Card className="w-full max-w-[1000px] mx-auto backdrop-blur-3xl bg-zinc-50 p-8 flex space-x-8 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] border-none">
+        <div className="w-full max-w-[400px] p-5">
+          <CardHeader className="pt-0 px-0">
+            <CardTitle className="text-slate-900 mb-3 text-3xl font-bold">
+              Create Account
+            </CardTitle>
+            <CardDescription className="text-slate-700 text-base">
+              Join us and start your journey with our platform
+            </CardDescription>
+          </CardHeader>
 
-                <div>
-                  <label className="text-gray-800 text-xs block mb-2">
-                    Full Name
-                  </label>
-                  <div className="relative flex items-center">
-                    <input
-                      name="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      disabled={isLoading}
-                      className="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 pl-2 pr-8 py-3 outline-none"
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-                </div>
+          {error && (
+            <div className="bg-red-50 p-4 rounded-lg flex items-center gap-x-3 text-sm text-red-600 mb-6 border border-red-100 animate-fade-in">
+              <TriangleAlert className="size-5" />
+              <p>{error}</p>
+            </div>
+          )}
 
-                <div className="mt-8">
-                  <label className="text-gray-800 text-xs block mb-2">
-                    Email
-                  </label>
-                  <div className="relative flex items-center">
-                    <input
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      disabled={isLoading}
-                      className="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 pl-2 pr-8 py-3 outline-none"
-                      placeholder="Enter email"
-                    />
-                  </div>
-                </div>
-
-                <div className="mt-8">
-                  <label className="text-gray-800 text-xs block mb-2">
-                    Password
-                  </label>
-                  <div className="relative flex items-center">
-                    <input
-                      name="password"
-                      type="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      required
-                      disabled={isLoading}
-                      className="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 pl-2 pr-8 py-3 outline-none"
-                      placeholder="Enter password"
-                    />
-                  </div>
-                </div>
-
-                <div className="mt-8">
-                  <label className="text-gray-800 text-xs block mb-2">
-                    Confirm Password
-                  </label>
-                  <div className="relative flex items-center">
-                    <input
-                      name="password_confirmation"
-                      type="password"
-                      value={formData.password_confirmation}
-                      onChange={handleChange}
-                      required
-                      disabled={isLoading}
-                      className="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 pl-2 pr-8 py-3 outline-none"
-                      placeholder="Confirm password"
-                    />
-                  </div>
-                </div>
-
-                <div className="mt-12">
-                  <button
-                    type="submit"
+          <CardContent className="space-y-2 px-0 pb-0">
+            <form onSubmit={handleSubmit} className="space-y-2">
+              <div className="space-y-0">
+                <label className="text-sm font-medium text-slate-700">Full Name</label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground/50 size-5" />
+                  <Input
+                    name="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
                     disabled={isLoading}
-                    className="w-full shadow-xl py-2.5 px-4 text-sm tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? "Creating account..." : "Create Account"}
-                  </button>
+                    placeholder="Enter your full name"
+                    className="pl-10 h-12 bg-white border-muted-foreground/20 focus:border-muted-foreground focus:ring-2 focus:ring-muted-foreground/20 transition-all duration-200"
+                  />
                 </div>
+              </div>
 
-                {error && (
-                  <div className="text-center text-red-600 font-medium mt-4">
-                    {error}
+              <div className="space-y-0">
+                <label className="text-sm font-medium text-slate-700">Email</label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground/50 size-5" />
+                  <Input
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    disabled={isLoading}
+                    placeholder="Enter your email"
+                    className="pl-10 h-12 bg-white border-muted-foreground/20 focus:border-muted-foreground focus:ring-2 focus:ring-muted-foreground/20 transition-all duration-200"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-0">
+                <label className="text-sm font-medium text-slate-700">Password</label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground/50 size-5" />
+                  <Input
+                    name="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    disabled={isLoading}
+                    placeholder="Enter your password"
+                    className="pl-10 h-12 bg-white border-muted-foreground/20 focus:border-muted-foreground focus:ring-2 focus:ring-muted-foreground/20 transition-all duration-200"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-0">
+                <label className="text-sm font-medium text-slate-700">Confirm Password</label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground/50 size-5" />
+                  <Input
+                    name="password_confirmation"
+                    type="password"
+                    value={formData.password_confirmation}
+                    onChange={handleChange}
+                    required
+                    disabled={isLoading}
+                    placeholder="Confirm your password"
+                    className="pl-10 h-12 bg-white border-muted-foreground/20 focus:border-muted-foreground focus:ring-2 focus:ring-muted-foreground/20 transition-all duration-200"
+                  />
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full h-12 bg-sky-600 hover:bg-sky-600/90 text-white font-medium text-[18px] rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                size="lg"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Creating account...
                   </div>
+                ) : (
+                  "Create Account"
                 )}
-              </form>
+              </Button>
+            </form>
+
+            <div className="relative">
+              <Separator className="my-6" />
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm text-slate-700">
+                Or continue with
+              </span>
             </div>
 
-            <div className="w-full h-full flex items-center bg-[#000842] rounded-xl p-8">
-              <img
-                src="https://readymadeui.com/signin-image.webp"
-                className="w-full aspect-[12/12] object-contain"
-                alt="signup-image"
-              />
+            <div className="flex flex-col gap-y-4">
+              <Button
+                disabled={isLoading}
+                onClick={() => handleProviderSignIn("google")}
+                variant="outline"
+                size="lg"
+                className="w-full h-12 relative hover:scale-105 transition-all duration-200"
+              >
+                <FcGoogle className="size-5 absolute left-4" />
+                <span className="ml-2 text-muted-foreground">Continue with Google</span>
+              </Button>
+              <Button
+                disabled={isLoading}
+                onClick={() => handleProviderSignIn("github")}
+                variant="outline"
+                size="lg"
+                className="w-full h-12 relative hover:scale-105 transition-all duration-200"
+              >
+                <FaGithub className="size-5 absolute left-4" />
+                <span className="ml-2 text-muted-foreground">Continue with GitHub</span>
+              </Button>
+            </div>
+
+            <p className="text-center text-sm text-muted-foreground mt-6">
+              Already have an account?{" "}
+              <Link
+                href="/login"
+                className="text-sky-700 cursor-pointer hover:underline transition-colors duration-200"
+              >
+                Sign in
+              </Link>
+            </p>
+          </CardContent>
+        </div>
+
+        <div className="hidden lg:block max-w-[500px] h-[600px] bg-sky-700 rounded-2xl mt-12 p-8 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://readymadeui.com/signin-image.webp')] bg-cover bg-center opacity-90"></div>
+          <div className="absolute inset-0 bg-gradient-to-t"></div>
+          <div className="relative h-full flex flex-col justify-end text-white">
+            <div className="backdrop-blur-sm rounded-lg p-4">
+              <h2 className="text-3xl font-bold mb-4">Join Our Community</h2>
+              <p className="text-lg text-neutral-50">
+                Create an account to access exclusive features and manage your bookings with ease.
+              </p>
             </div>
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

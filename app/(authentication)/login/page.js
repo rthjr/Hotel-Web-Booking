@@ -6,7 +6,7 @@ const page = () => {
     <div
       className="w-full h-screen flex items-center justify-center"
       style={{
-        backgroundImage: "url('./image/backgroundLoginForm.avif')",
+        backgroundImage: "url('./image/backgroundLoginForm.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

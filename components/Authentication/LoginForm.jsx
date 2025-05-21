@@ -192,7 +192,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@components/ui/seperator";
-import { TriangleAlert } from "lucide-react";
+import { TriangleAlert, Mail, Lock } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { authService } from "@/lib/authService";
@@ -229,101 +229,141 @@ const LoginForm = () => {
     }
   };
 
-
   const handleProviderSignIn = (provider) => {
-    // Placeholder for social login logic
     setPending(true);
     console.log(`Logging in with ${provider}`);
     setTimeout(() => {
       setPending(false);
-      // Simulate success
       router.push("/");
     }, 1000);
   };
 
   return (
-    <Card className="w-full max-w-[400px] mx-auto p-8">
-      <CardHeader className="pt-0 px-0">
-        <CardTitle className="text-textColor mb-3 text-2xl">
-          Login to continue
-        </CardTitle>
-        <CardDescription className="text-textColor">
-          Use your email or a provider to log in
-        </CardDescription>
-      </CardHeader>
+    <div className="">
+      <Card className="w-full max-w-[1000px] mx-auto backdrop-blur-3xl bg-zinc-50 p-8 flex space-x-8 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] border-none">
+        <div className="w-full max-w-[400px] p-5">
+          <CardHeader className="pt-0 px-0">
+            <CardTitle className="text-slate-900 mb-3 text-3xl font-bold">
+              Welcome Back
+            </CardTitle>
+            <CardDescription className="text-slate-700 text-base">
+              Sign in to access your account and continue your journey
+            </CardDescription>
+          </CardHeader>
 
-      {error && (
-        <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6">
-          <TriangleAlert className="size-4" />
-          <p>{error}</p>
+          {error && (
+            <div className="bg-red-50 p-4 rounded-lg flex items-center gap-x-3 text-sm text-red-600 mb-6 border border-red-100 animate-fade-in">
+              <TriangleAlert className="size-5" />
+              <p>{error}</p>
+            </div>
+          )}
+
+          <CardContent className="space-y-6 px-0 pb-0">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-slate-700">Email</label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground/50 size-5" />
+                  <Input
+                    type="email"
+                    disabled={pending}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    required
+                    className="pl-10 h-12 bg-white border-muted-foreground/20 focus:border-muted-foreground focus:ring-2 focus:ring-muted-foreground/20 transition-all duration-200"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-slate-700">Password</label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground/50 size-5" />
+                  <Input
+                    type="password"
+                    disabled={pending}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    required
+                    className="pl-10 h-12 bg-white border-muted-foreground/20 focus:border-muted-foreground focus:ring-2 focus:ring-muted-foreground/20 transition-all duration-200"
+                  />
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full h-12 bg-sky-600 hover:bg-sky-600/90 text-white font-medium text-[18px] rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                size="lg"
+                disabled={pending}
+              >
+                {pending ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Signing in...
+                  </div>
+                ) : (
+                  "Sign In"
+                )}
+              </Button>
+            </form>
+
+            <div className="relative">
+              <Separator className="my-6" />
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm text-slate-700">
+                Or continue with
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-y-4">
+              <Button
+                disabled={pending}
+                onClick={() => handleProviderSignIn("google")}
+                variant="outline"
+                size="lg"
+                className="w-full h-12 relative hover:scale-105 transition-all duration-200"
+              >
+                <FcGoogle className="size-5 absolute left-4" />
+                <span className="ml-2 text-muted-foreground">Continue with Google</span>
+              </Button>
+              <Button
+                disabled={pending}
+                onClick={() => handleProviderSignIn("github")}
+                variant="outline"
+                size="lg"
+                className="w-full h-12 relative hover:scale-105 transition-all duration-200"
+              >
+                <FaGithub className="size-5 absolute left-4" />
+                <span className="ml-2 text-muted-foreground">Continue with GitHub</span>
+              </Button>
+            </div>
+
+            <p className="text-center text-sm text-muted-foreground mt-6">
+              Don't have an account?{" "}
+              <Link
+                href="/signup"
+                className="text-sky-700 cursor-pointer hover:underline transition-colors duration-200"
+              >
+                Create an account
+              </Link>
+            </p>
+          </CardContent>
         </div>
-      )}
-
-      <CardContent className="space-y-6 px-0 pb-0">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            type="email"
-            disabled={pending}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-          />
-          <Input
-            type="password"
-            disabled={pending}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-          />
-          <Button
-            type="submit"
-            className="w-full hover:scale-105 transition-all duration-300"
-            size="lg"
-            disabled={pending}
-            variant="default"
-          >
-            {pending ? "Signing in..." : "Continue"}
-          </Button>
-        </form>
-
-        <Separator />
-
-        <div className="flex flex-col gap-y-4">
-          <Button
-            disabled={pending}
-            onClick={() => handleProviderSignIn("google")}
-            variant="outline"
-            size="lg"
-            className="w-full relative hover:scale-105 transition-all duration-300"
-          >
-            <FcGoogle className="size-5 absolute top-2.5 left-2.5" />
-            Continue with Google
-          </Button>
-          <Button
-            disabled={pending}
-            onClick={() => handleProviderSignIn("github")}
-            variant="outline"
-            size="lg"
-            className="w-full relative hover:scale-105 transition-all duration-300"
-          >
-            <FaGithub className="size-5 absolute top-2.5 left-2.5" />
-            Continue with GitHub
-          </Button>
+        <div className="hidden lg:block max-w-[500px] h-[600px] bg-sky-700 rounded-2xl mt-1 p-8 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://readymadeui.com/signin-image.webp')] bg-cover bg-center opacity-90"></div>
+          <div className="absolute inset-0 bg-gradient-to-t"></div>
+          <div className="relative h-full flex flex-col justify-end text-white">
+            <div className="backdrop-blur-sm rounded-lg p-4">
+            <h2 className="text-3xl font-bold mb-4">Welcome to Our Platform</h2>
+            <p className="text-lg text-neutral-50">
+              Sign in to access exclusive features and manage your bookings with ease.
+            </p>
+            </div>
+          </div>
         </div>
-
-        <p className="text-xs text-gray-700 mt-4">
-          Don't have an account?{" "}
-          <Link
-            href="/signup"
-            className="text-sky-700 cursor-pointer hover:underline"
-          >
-            Sign up
-          </Link>
-        </p>
-      </CardContent>
-    </Card>
+      </Card>
+    </div>
   );
 };
 
