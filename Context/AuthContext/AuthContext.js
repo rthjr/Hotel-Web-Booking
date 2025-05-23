@@ -2,9 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { login, logout, checkAuth } from "@/lib/auth";
+import { logout, checkAuth } from "@/lib/auth";
 import { authService } from "@lib/authService";
-import { set } from "mongoose";
 
 const AuthContext = createContext();
 
@@ -18,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState([]);
 
-  const refresh = localStorage.getItem("refresh_token") ? true : false;
+  const refresh = typeof window !== "undefined" && localStorage.getItem("refresh_token") ? true : false;
 
   const handleLogin = async (email, password) => {
     try {
@@ -62,19 +61,6 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
-  /*
-    const handleLogin = async (email, password) => {
-        try {
-            const response = await login(email, password);
-            setIsLogin(true);
-            setUserName(response.user.lastName || "");
-            router.push('/');
-            return { success: true };
-        } catch (error) {
-            console.error('Login failed:', error);
-            return { success: false, error: error.message };
-        }
-    }; */
 
   const handleLogout = async () => {
     try {
@@ -86,6 +72,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("refresh_token");
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      document.cookie = "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
       router.push("/");
     } catch (error) {
       console.error("Logout failed:", error);

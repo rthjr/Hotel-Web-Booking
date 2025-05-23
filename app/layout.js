@@ -1,7 +1,6 @@
 
 
 import "@styles/globals.css";
-import { AuthPv } from "./Providers";
 import { AuthProvider } from "@Context/AuthContext/AuthContext";
 
 export const metadata = {
@@ -13,9 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        
-          <AuthPv><AuthProvider>{children}</AuthProvider></AuthPv>
-        
+          <AuthProvider>{children}</AuthProvider>     
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
 
@@ -24,3 +24,4 @@ export const ContentProvider = ({ children }) => {
 };
 
 export const useContent = () => useContext(ContentContext);
+ */

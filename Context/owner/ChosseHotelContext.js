@@ -1,4 +1,4 @@
-"use client"; // Required for Next.js App Router (client-side context)
+/* "use client"; // Required for Next.js App Router (client-side context)
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
@@ -27,3 +27,4 @@ export const HotelProvider = ({ children }) => {
 
 // Custom hook to use the context
 export const useHotelContext = () => useContext(HotelContext);
+ */

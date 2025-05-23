@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 import { SessionProvider, useSession } from "next-auth/react";
 import React, { useEffect } from "react";
@@ -32,3 +32,4 @@ export const OwnerAuthProvider = ({ children }) => {
 
     return <>{children}</>;
 };
+ */
