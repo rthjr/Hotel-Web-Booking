@@ -27,7 +27,7 @@ const page = () => {
                 <div className='flex flex-col gap-8 justify-center items-center'>
                     <h2 className='text-3xl font-bold text-textColor'>Take a tour</h2>
                     {/* explore component */}
-                    <div className='w-10/12'>
+                    <div className='w-10/12 items-center justify-center flex flex-col gap-8 h-full'>
                         <Explore />
                     </div>
                 </div>

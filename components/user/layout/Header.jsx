@@ -14,8 +14,27 @@ const Header = () => {
   const [actionMenuBar, setActionMenuBar] = useState("Home");
   const { isLogin, userName, isDropdownOpen, setIsDropdownOpen, handleLogout } =
     useAuth();
+    const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname(); // Get current page path
+  
+  // Scroll detection
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
 
+      if (currentScrollY > lastScrollY) {
+        setShowNavbar(false); // Scrolling down
+      } else {
+        setShowNavbar(true); // Scrolling up
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
   // Function to handle menu selection and persist it
   const handleMenuClick = (menuName) => {
     setActionMenuBar(menuName);
@@ -40,16 +59,17 @@ const Header = () => {
   const menuItems = [
     { name: "Home", path: "/" },
     { name: "Explore", path: "/Explore" },
-    { name: "Hotel", path: "/HotelCards" },
+    { name: "Hotel", path: "/hotels" },
     { name: "About", path: "/About" },
     { name: "Contact", path: "/Contact" },
-    { name: "Room", path: "/HotelCards/Rooms" },
-    { name: "Reservation", path: "/Reservation", requiresLogin: true },
-    { name: "Management", path: "/ChooseHotel", requiresOwner: true },
+    { name: "Reservation", path: "/reservations", requiresLogin: true },
+    { name: "Management", path: "/dashboard/owner", requiresOwner: true },
   ];
 
   return (
-    <div className="sticky top-0 bg-white">
+    <div className={`fixed top-0 left-0 w-full bg-white px-28 shadow-lg transition-transform duration-300 z-50 ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      }`}>
       <div className="flex justify-between items-center py-1">
         <Link href="/">
           <Image src="/logo/logo.png" alt="logo" width={100} height={100} />

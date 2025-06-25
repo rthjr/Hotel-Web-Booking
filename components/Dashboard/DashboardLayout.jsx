@@ -1,98 +1,152 @@
 "use client";
+import { useAuth } from "@Context/AuthContext/AuthContext";
+import { usePermissions } from "@hooks/usePermissions";
+import ProtectedRoute from "@components/components/role-and-permissions-handle/ProtectedRoute";
+import PermissionGate from "@components/components/role-and-permissions-handle/PermissionGate";
+import RoleBasedComponent from "@components/components/role-and-permissions-handle/RoleBasedComponent";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { authService } from '@/lib/authService';
-
-const DashboardLayout = ({ children }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    try {
-      await authService.logout();
-      router.push('/login');
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
-  };
+const Dashboard = () => {
+  const { userData, userRole, accessLevel } = useAuth();
+  const { 
+    canManageUsers, 
+    canManageProperties, 
+    canViewReports,
+    hasPermission 
+  } = usePermissions();
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Navigation */}
-      <nav className="bg-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <Link href="/dashboard" className="text-xl font-bold text-gray-800">
-                  Hotel Dashboard
-                </Link>
-              </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <Link
-                  href="/dashboard"
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                >
-                  Overview
-                </Link>
-                <Link
-                  href="/dashboard/bookings"
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                >
-                  Bookings
-                </Link>
-                <Link
-                  href="/dashboard/profile"
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                >
-                  Profile
-                </Link>
+    <ProtectedRoute requiredPermissions={['dashboard']} requiredAccessLevel={50}>
+      <div className="p-6">
+        <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+        
+        {/* User Info */}
+        <div className="mb-8 p-4 bg-gray-100 rounded-lg">
+          <h2 className="text-xl font-semibold mb-2">Welcome, {userData.name}!</h2>
+          <p>Role: <span className="font-medium">{userRole}</span></p>
+          <p>Access Level: <span className="font-medium">{accessLevel}</span></p>
+        </div>
+
+        {/* Role-based navigation */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {/* Admin Section */}
+          <PermissionGate 
+            requiredPermissions={['users', 'settings']} 
+            requiredAccessLevel={100}
+          >
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <h3 className="text-lg font-semibold text-red-800 mb-3">Admin Panel</h3>
+              <div className="space-y-2">
+                <button className="block w-full text-left p-2 bg-red-100 hover:bg-red-200 rounded">
+                  Manage Users
+                </button>
+                <button className="block w-full text-left p-2 bg-red-100 hover:bg-red-200 rounded">
+                  System Settings
+                </button>
               </div>
             </div>
-            <div className="hidden sm:ml-6 sm:flex sm:items-center">
-              <div className="ml-3 relative">
-                <div>
-                  <button
-                    type="button"
-                    className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  >
-                    <span className="sr-only">Open user menu</span>
-                    <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-600 font-medium">U</span>
-                    </div>
-                  </button>
-                </div>
-                {isMenuOpen && (
-                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
-                    <Link
-                      href="/dashboard/profile"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Your Profile
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Sign out
-                    </button>
-                  </div>
-                )}
+          </PermissionGate>
+
+          {/* Owner Section */}
+          <PermissionGate 
+            requiredPermissions={['properties']} 
+            requiredAccessLevel={80}
+          >
+            <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <h3 className="text-lg font-semibold text-blue-800 mb-3">Property Management</h3>
+              <div className="space-y-2">
+                <button className="block w-full text-left p-2 bg-blue-100 hover:bg-blue-200 rounded">
+                  Manage Properties
+                </button>
+                <button className="block w-full text-left p-2 bg-blue-100 hover:bg-blue-200 rounded">
+                  Reservations
+                </button>
               </div>
             </div>
+          </PermissionGate>
+
+          {/* Reports Section (Admin & Owner) */}
+          <PermissionGate 
+            requiredPermissions={['reports']} 
+            requiredAccessLevel={80}
+          >
+            <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+              <h3 className="text-lg font-semibold text-green-800 mb-3">Reports</h3>
+              <div className="space-y-2">
+                <button className="block w-full text-left p-2 bg-green-100 hover:bg-green-200 rounded">
+                  Financial Reports
+                </button>
+                <button className="block w-full text-left p-2 bg-green-100 hover:bg-green-200 rounded">
+                  Analytics
+                </button>
+              </div>
+            </div>
+          </PermissionGate>
+        </div>
+
+        {/* Role-based content using RoleBasedComponent */}
+        <RoleBasedComponent
+          adminComponent={
+            <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+              <h3 className="text-lg font-semibold text-purple-800 mb-2">Admin Dashboard</h3>
+              <p>Full system access and control panel</p>
+            </div>
+          }
+          ownerComponent={
+            <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <h3 className="text-lg font-semibold text-yellow-800 mb-2">Owner Dashboard</h3>
+              <p>Property and reservation management</p>
+            </div>
+          }
+          userComponent={
+            <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">User Dashboard</h3>
+              <p>Profile and booking management</p>
+            </div>
+          }
+        />
+
+        {/* Conditional rendering with helper functions */}
+        <div className="mt-8">
+          <h3 className="text-xl font-semibold mb-4">Quick Actions</h3>
+          <div className="flex flex-wrap gap-3">
+            {canManageUsers() && (
+              <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                User Management
+              </button>
+            )}
+            
+            {canManageProperties() && (
+              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                Property Management
+              </button>
+            )}
+            
+            {canViewReports() && (
+              <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                View Reports
+              </button>
+            )}
+            
+            {hasPermission('profile') && (
+              <button className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+                Edit Profile
+              </button>
+            )}
           </div>
         </div>
-      </nav>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        {children}
-      </main>
-    </div>
+        {/* Permission debugging (remove in production) */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="mt-8 p-4 bg-gray-100 rounded-lg">
+            <h4 className="font-semibold mb-2">Debug Info:</h4>
+            <p>Permissions: {JSON.stringify(userData.permissions || [])}</p>
+            <p>Access Level: {accessLevel}</p>
+            <p>Role: {userRole}</p>
+          </div>
+        )}
+      </div>
+    </ProtectedRoute>
   );
 };
 
-export default DashboardLayout; 
+export default Dashboard;

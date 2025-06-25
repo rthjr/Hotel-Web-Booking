@@ -10,7 +10,7 @@ const BannerAboutUs = () => {
           className=" absolute inset-0 w-full h-[100vh]"
           style={{
             backgroundImage:
-              "url('https://wallpapers.com/images/hd/fancy-hotel-room-nemacolin-resort-5z2qflmeuynjm0ln.jpg')",
+              "url('https://watermark.lovepik.com/photo/20211122/large/lovepik-hotel-lobby-picture_500742423.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

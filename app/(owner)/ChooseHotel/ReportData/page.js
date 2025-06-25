@@ -13,10 +13,10 @@ const Page = () => {
     });
     const [report, setReport] = useState([]); // Stores flattened reservations for the table
     const [searchQuery, setSearchQuery] = useState(""); // Search query for filtering by name
-    const { hotelId } = useHotelContext(); // Context for selected hotel
+     // Context for selected hotel
 
     const fetchData = async () => {
-        if (!hotelId) return; // Exit if hotelId is not set
+        // Exit if hotelId is not set
 
         try {
             const res = await fetch(API_ENDPOINTS.HOTELS);

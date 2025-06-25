@@ -15,9 +15,9 @@ const Explore = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col gap-8">
+    <div className="w-[90%] h-full flex flex-col gap-8">
       {exploreList.map((explore) => (
-        <div key={explore.exploreId} className="w-full h-full flex flex-col justify-center items-center">
+        <div key={explore.id} className="w-full h-full flex flex-col justify-center items-center">
           <div className="w-full h-[60vh] relative">
             <Image
               src={explore.image}

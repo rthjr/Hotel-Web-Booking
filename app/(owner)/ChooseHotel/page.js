@@ -9,12 +9,12 @@ import { Button } from "@components/user/layout/Button";
 import { FaTv } from "react-icons/fa";
 import { PiShower } from "react-icons/pi";
 import { FaWifi } from "react-icons/fa6";
-import { useHotelContext } from "@Context/owner/ChosseHotelContext";
+
 import Topbar from '@components/owner/component/layout/Topbar';
 
 const Page = () => {
 
-  const { setHotelId } = useHotelContext();
+  
   const [hotels, setHotels] = useState([]);
   const router = useRouter();
 

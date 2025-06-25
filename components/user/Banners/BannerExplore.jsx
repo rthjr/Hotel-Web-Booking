@@ -2,7 +2,7 @@ import React from "react";
 
 const BannerExplore = () => {
   return (
-    <div className="relative w-full h-[500px] md:h-[700px] overflow-hidden shadow-lg">
+    <div className="relative w-full h-screen overflow-hidden shadow-lg">
       <video
         src="/video/ExplorBanner.mp4"
         type="video/mp4"
